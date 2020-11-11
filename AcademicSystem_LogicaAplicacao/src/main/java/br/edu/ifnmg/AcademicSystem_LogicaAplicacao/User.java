@@ -6,32 +6,56 @@
 package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author diego
  */
 @Entity
+@Table(name="Users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long user;
-
+    
+    @Column(name = "Name", length = 250, nullable = true)
     private String name;
+    
+    @Column(name = "Street", length = 250, nullable = true)
     private String street;
-    private String numberhouse;
+    
+    @Column(name = "Numberhouse" , nullable = true)
+    private int numberhouse;
+    
+    @Column(name = "Password", length = 250, nullable = true)
     private String password;
+    
+    @Column(name = "Login", length = 250, unique = true, nullable = true)
     private String login;
+    
+    @Column(name = "Cpf", length = 15, unique = true, nullable = true)
     private String cpf;
+    
+    @Column(name = "Type", length = 15, nullable = true)
     private String type;
+    
+    @Column(name = "Sex", length = 1)
     private char sex;
+    
+    @Column(name = "Status", nullable = true)
     private int status;
+    
+    public User(){
+    
+    }
     
     public Long getId() {
         return user;
@@ -57,11 +81,11 @@ public class User implements Serializable {
         this.street = newStreet;
     }
     
-    public String getNumberhouse(){
+    public int getNumberhouse(){
         return numberhouse;
     }
     
-    public void setNumberhouse(String newNumberhouse){
+    public void setNumberhouse(int newNumberhouse){
         this.numberhouse = newNumberhouse;
     }
     
