@@ -6,6 +6,7 @@
 package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long user;
+    private Long id;
     
     @Column(name = "Name", length = 250, nullable = true)
     private String name;
@@ -54,15 +55,25 @@ public class User implements Serializable {
     private int status;
     
     public User(){
-    
+        this.id = 0L;
+        this.name = "";
+        this.cpf = "";
+        this.login = "";
+        this.numberhouse = 0;
+        this.password = "";
+        this.sex = 'm';
+        this.status = 0;
+        this.street = "";
+        this.type = "";
+        
     }
     
     public Long getId() {
-        return user;
+        return id;
     }
 
     public void setId(Long newUser) {
-        this.user = newUser;
+        this.id = newUser;
     }
 
     public String getName(){
@@ -136,30 +147,72 @@ public class User implements Serializable {
     public void setStatus(int newStatus){
         this.status = newStatus;
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += ( user != null ? user.hashCode() : 0);
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.street);
+        hash = 79 * hash + this.numberhouse;
+        hash = 79 * hash + Objects.hashCode(this.password);
+        hash = 79 * hash + Objects.hashCode(this.login);
+        hash = 79 * hash + Objects.hashCode(this.cpf);
+        hash = 79 * hash + Objects.hashCode(this.type);
+        hash = 79 * hash + this.sex;
+        hash = 79 * hash + this.status;
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof User)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        User other = (User) object;
-        if ((this.user == null && other.user != null) || (this.user != null && !this.user.equals(other.user))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final User other = (User) obj;
+        if (this.numberhouse != other.numberhouse) {
+            return false;
+        }
+        if (this.sex != other.sex) {
+            return false;
+        }
+        if (this.status != other.status) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.street, other.street)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        if (!Objects.equals(this.login, other.login)) {
+            return false;
+        }
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
-
+    
+    
     @Override
     public String toString() {
-        return "br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User[ user=" + user + " ]";
+        return this.name;
     }
     
 }

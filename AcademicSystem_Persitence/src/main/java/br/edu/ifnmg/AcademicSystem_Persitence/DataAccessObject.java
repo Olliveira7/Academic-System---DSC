@@ -26,6 +26,10 @@ public class DataAccessObject<T> implements Repository<T> {
         this.type = type;
     }
 
+    public DataAccessObject(){
+    
+    }
+    
     public Class getType() {
         return type;
     }
@@ -56,7 +60,7 @@ public class DataAccessObject<T> implements Repository<T> {
             
         }catch(Exception exeption){
             transaction.rollback();
-        
+            System.out.println("Exceção: " + exeption);
             return false;
         }
     }
