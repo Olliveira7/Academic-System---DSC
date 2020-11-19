@@ -9,7 +9,6 @@ package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
  *
  * @author diego
  */
-public interface UserRepository extends Repository<User> {
-    public boolean login(String user, String password);
+public interface ClientRepository extends Repository<Client> {
+    
 }
-

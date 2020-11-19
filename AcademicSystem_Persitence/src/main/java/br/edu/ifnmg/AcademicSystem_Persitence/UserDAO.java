@@ -13,14 +13,15 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
  * @author diego
  */
 public class UserDAO extends DataAccessObject<User> implements UserRepository{
-    
+
     public UserDAO() {
         super(User.class);
     }
-
+    
     @Override
-    public boolean login(String user, String password) {
+    public boolean login(String user, String senha) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+     
 }

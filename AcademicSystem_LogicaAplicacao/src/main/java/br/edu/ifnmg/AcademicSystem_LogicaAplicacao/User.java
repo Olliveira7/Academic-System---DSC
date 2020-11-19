@@ -30,36 +30,41 @@ public class User implements Serializable {
     @Column(name = "Name", length = 250, nullable = true)
     private String name;
     
-    @Column(name = "Street", length = 250, nullable = true)
+    @Column(name = "Street", length = 250)//, nullable = true)
     private String street;
     
-    @Column(name = "Numberhouse" , nullable = true)
+    @Column(name = "Numberhouse" )//, nullable = true)
     private int numberhouse;
     
-    @Column(name = "Password", length = 250, nullable = true)
+    @Column(name = "Neighborhood" )//, nullable = true)
+    private String neighborhood;
+    
+    @Column(name = "Password", length = 250)//, nullable = true)
     private String password;
     
-    @Column(name = "Login", length = 250, unique = true, nullable = true)
+    @Column(name = "Login", length = 250)//, unique = true, nullable = true)
     private String login;
     
-    @Column(name = "Cpf", length = 15, unique = true, nullable = true)
+    @Column(name = "Cpf", length = 15)//, unique = true, nullable = true)
     private String cpf;
     
-    @Column(name = "Type", length = 15, nullable = true)
+    @Column(name = "Type", length = 15)//, nullable = true)
     private String type;
     
     @Column(name = "Sex", length = 1)
     private char sex;
     
-    @Column(name = "Status", nullable = true)
+    @Column(name = "Status")//, nullable = true)
     private int status;
     
     public User(){
+        //tipos long se inicializa com 0L
         this.id = 0L;
         this.name = "";
         this.cpf = "";
         this.login = "";
         this.numberhouse = 0;
+        this.neighborhood = "";
         this.password = "";
         this.sex = 'm';
         this.status = 0;
@@ -67,100 +72,113 @@ public class User implements Serializable {
         this.type = "";
         
     }
-    
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long newUser) {
-        this.id = newUser;
-    }
-
-    public String getName(){
+    public String getName() {
         return name;
     }
-    
-    public void setName(String newName){
-        this.name = newName;
-    }
-    
-    public String getStreet(){
+
+    public String getStreet() {
         return street;
     }
-    
-    public void setStreet(String newStreet){
-        this.street = newStreet;
-    }
-    
-    public int getNumberhouse(){
+
+    public int getNumberhouse() {
         return numberhouse;
     }
-    
-    public void setNumberhouse(int newNumberhouse){
-        this.numberhouse = newNumberhouse;
+
+    public String getNeighborhood() {
+        return neighborhood;
     }
-    
-    public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
-    
-    public void setPassword(String newPassword){
-        this.password = newPassword;
-    }
-    
-    public String getLogin(){
+
+    public String getLogin() {
         return login;
     }
-    
-    public void setLogin(String newLogin){
-        this.login = newLogin;
-    }
-    
-    public String getCpf(){
+
+    public String getCpf() {
         return cpf;
     }
-    
-    public void setCpf(String newCpf){
-        this.cpf = newCpf;
-    }
-    
-    public String getType(){
+
+    public String getType() {
         return type;
     }
-    
-    public void setType(String newType){
-        this.type = newType;
-    }
-    
-    public char getSex(){
+
+    public char getSex() {
         return sex;
     }
-    
-    public void setSex(char newSex){
-        this.sex = newSex;
-    }
-    
-    public int getStatus(){
+
+    public int getStatus() {
         return status;
-    } 
-    
-    public void setStatus(int newStatus){
-        this.status = newStatus;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public void setNumberhouse(int numberhouse) {
+        this.numberhouse = numberhouse;
+    }
+
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setSex(char sex) {
+        this.sex = sex;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 79 * hash + Objects.hashCode(this.id);
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + Objects.hashCode(this.street);
-        hash = 79 * hash + this.numberhouse;
-        hash = 79 * hash + Objects.hashCode(this.password);
-        hash = 79 * hash + Objects.hashCode(this.login);
-        hash = 79 * hash + Objects.hashCode(this.cpf);
-        hash = 79 * hash + Objects.hashCode(this.type);
-        hash = 79 * hash + this.sex;
-        hash = 79 * hash + this.status;
+        hash = 11 * hash + Objects.hashCode(this.id);
+        hash = 11 * hash + Objects.hashCode(this.name);
+        hash = 11 * hash + Objects.hashCode(this.street);
+        hash = 11 * hash + this.numberhouse;
+        hash = 11 * hash + Objects.hashCode(this.neighborhood);
+        hash = 11 * hash + Objects.hashCode(this.password);
+        hash = 11 * hash + Objects.hashCode(this.login);
+        hash = 11 * hash + Objects.hashCode(this.cpf);
+        hash = 11 * hash + Objects.hashCode(this.type);
+        hash = 11 * hash + this.sex;
+        hash = 11 * hash + this.status;
         return hash;
     }
 
@@ -189,6 +207,9 @@ public class User implements Serializable {
             return false;
         }
         if (!Objects.equals(this.street, other.street)) {
+            return false;
+        }
+        if (!Objects.equals(this.neighborhood, other.neighborhood)) {
             return false;
         }
         if (!Objects.equals(this.password, other.password)) {

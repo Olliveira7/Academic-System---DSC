@@ -55,6 +55,26 @@ public class DataAccessObject<T> implements Repository<T> {
             this.manager.persist(obg);//faz a transação
             
             transaction.commit(); // Finalia a transação
+            System.out.println("554545454545454");
+            return true; 
+            
+        }catch(Exception exeption){
+            transaction.rollback();
+            System.out.println("Exceção: " + exeption);
+            System.out.println("888888");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean Delete(T obg) {
+        EntityTransaction transaction = this.manager.getTransaction();
+        try{
+            transaction.begin();// inicia a transação
+            
+            this.manager.remove(obg);//faz a transação, nesse caso trocasse o persiste pelo remove
+            
+            transaction.commit(); // Finalia a transação
             
             return true; 
             
@@ -66,13 +86,16 @@ public class DataAccessObject<T> implements Repository<T> {
     }
 
     @Override
-    public boolean Delete(T obg) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public T Open(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            
+            T obg = (T)this.manager.find(this.type, id);
+            
+            return obg; 
+            
+        }catch(Exception exeption){
+            return null;
+        }
     }
 
     @Override

@@ -8,12 +8,12 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>AcademicSystem_Persitence</artifactId>
+            <artifactId>AcademicSystem_LogicaAplicacao</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>AcademicSystem_LogicaAplicacao</artifactId>
+            <artifactId>AcademicSystem_Persitence</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
