@@ -55,13 +55,11 @@ public class DataAccessObject<T> implements Repository<T> {
             this.manager.persist(obg);//faz a transação
             
             transaction.commit(); // Finalia a transação
-            System.out.println("554545454545454");
             return true; 
             
         }catch(Exception exeption){
             transaction.rollback();
             System.out.println("Exceção: " + exeption);
-            System.out.println("888888");
             return false;
         }
     }

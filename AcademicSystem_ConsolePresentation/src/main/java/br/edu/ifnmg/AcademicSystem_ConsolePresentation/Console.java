@@ -5,12 +5,9 @@
  */
 package br.edu.ifnmg.AcademicSystem_ConsolePresentation;
 
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ClientRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
-import br.edu.ifnmg.AcademicSystem_Persitence.ClientDAO;
-import br.edu.ifnmg.AcademicSystem_Persitence.UserDAO;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Supplier;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SupplierRepository;
+import br.edu.ifnmg.AcademicSystem_Persitence.SupplierDAO;
 
 
 /**
@@ -38,12 +35,12 @@ public class Console {
 //        }else{
 //            System.out.println("Falhoooooooo");
 //        }
-        System.out.println("111111111");
-        ClientRepository repo = new ClientDAO();
-        
-        Client c = repo.Open(101L);
-        System.out.println(c.getName() + " , " + c.getCpf());
-        
+//        System.out.println("111111111");
+//        ClientRepository repo = new ClientDAO();
+//        
+//        Client c = repo.Open(101L);
+//        System.out.println(c.getName() + " , " + c.getCpf());
+//        
 //        System.out.println("22222222");
 //        Client c = new Client();
 //        c.setCpf("sjwduj3d");
@@ -53,6 +50,17 @@ public class Console {
 //        }else{
 //            System.out.println("Falhoooooooo");
 //        }
+        SupplierRepository repo = new SupplierDAO();
+        Supplier s = new Supplier();
+        s.setCnpj("hashiwdniuw");
+        s.setName("keniodneif");
+        s.setEmail("dhuediw");
+        
+        if(repo.Save(s)){
+            System.out.println("Sucesso");
+        }else{
+            System.out.println("Falhoooooooo");
+        }
     }
     
 }
