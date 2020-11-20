@@ -5,8 +5,14 @@
  */
 package br.edu.ifnmg.AcademicSystem_ConsolePresentation;
 
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ClientRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Product;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ProductRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Supplier;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SupplierRepository;
+import br.edu.ifnmg.AcademicSystem_Persitence.ClientDAO;
+import br.edu.ifnmg.AcademicSystem_Persitence.ProductDAO;
 import br.edu.ifnmg.AcademicSystem_Persitence.SupplierDAO;
 
 
@@ -41,26 +47,37 @@ public class Console {
 //        Client c = repo.Open(101L);
 //        System.out.println(c.getName() + " , " + c.getCpf());
 //        
+//        ClientRepository repo = new ClientDAO();
 //        System.out.println("22222222");
 //        Client c = new Client();
-//        c.setCpf("sjwduj3d");
-//        c.setName("dnednioe");
+//        c.setCpf("tttttt");
+//        c.setName("jdeidjiejde");
 //        if(repo.Save(c)){
 //            System.out.println("Sucesso");
 //        }else{
 //            System.out.println("Falhoooooooo");
 //        }
-        SupplierRepository repo = new SupplierDAO();
-        Supplier s = new Supplier();
-        s.setCnpj("hashiwdniuw");
-        s.setName("keniodneif");
-        s.setEmail("dhuediw");
-        
-        if(repo.Save(s)){
+//        SupplierRepository repo = new SupplierDAO();
+//        Supplier s = new Supplier();
+//        s.setCnpj("hashiwdniuw");
+//        s.setName("keniodneif");
+//        s.setEmail("dhuediw");
+//        
+//        if(repo.Save(s)){
+//            System.out.println("Sucesso");
+//        }else{
+//            System.out.println("Falhoooooooo");
+//        }
+
+          ProductRepository repo = new ProductDAO();
+          Product p = new Product();
+          p.setName("farofa");
+          
+          if(repo.Save(p)){
             System.out.println("Sucesso");
-        }else{
+          }else{
             System.out.println("Falhoooooooo");
-        }
+          }
     }
     
 }

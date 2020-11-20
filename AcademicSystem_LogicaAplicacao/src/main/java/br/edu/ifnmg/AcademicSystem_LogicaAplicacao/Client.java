@@ -52,10 +52,10 @@ public class Client implements Serializable {
     private String telephone;
     
     @Column(name = "sex")
-    private char Sex;
+    private Sex sex;
     
     public Client(){
-        this.Sex = 'm';
+        this.sex = Sex.F;
         this.cpf = "";
         this.email = "";
         this.id = 0L;
@@ -107,8 +107,8 @@ public class Client implements Serializable {
         return telephone;
     }
 
-    public char getSex() {
-        return Sex;
+    public Sex getSex() {
+        return this.sex;
     }
 
     public void setName(String name) {
@@ -143,23 +143,23 @@ public class Client implements Serializable {
         this.telephone = telephone;
     }
 
-    public void setSex(char Sex) {
-        this.Sex = Sex;
+    public void setSex(Sex sex) {
+        this.sex = sex;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 73 * hash + Objects.hashCode(this.id);
-        hash = 73 * hash + Objects.hashCode(this.name);
-        hash = 73 * hash + Objects.hashCode(this.cpf);
-        hash = 73 * hash + Objects.hashCode(this.email);
-        hash = 73 * hash + this.status;
-        hash = 73 * hash + Objects.hashCode(this.street);
-        hash = 73 * hash + this.numberhouse;
-        hash = 73 * hash + Objects.hashCode(this.neighborhood);
-        hash = 73 * hash + Objects.hashCode(this.telephone);
-        hash = 73 * hash + this.Sex;
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.cpf);
+        hash = 79 * hash + Objects.hashCode(this.email);
+        hash = 79 * hash + this.status;
+        hash = 79 * hash + Objects.hashCode(this.street);
+        hash = 79 * hash + this.numberhouse;
+        hash = 79 * hash + Objects.hashCode(this.neighborhood);
+        hash = 79 * hash + Objects.hashCode(this.telephone);
+        hash = 79 * hash + Objects.hashCode(this.sex);
         return hash;
     }
 
@@ -179,9 +179,6 @@ public class Client implements Serializable {
             return false;
         }
         if (this.numberhouse != other.numberhouse) {
-            return false;
-        }
-        if (this.Sex != other.Sex) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -205,11 +202,13 @@ public class Client implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+        if (this.sex != other.sex) {
+            return false;
+        }
         return true;
     }
-    
-    
 
+    
     @Override
     public String toString() {
         return this.name;

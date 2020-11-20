@@ -5,6 +5,7 @@
     <class>br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User</class>
     <class>br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client</class>
     <class>br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Supplier</class>
+    <class>br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Product</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/academic_system?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

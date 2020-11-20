@@ -52,7 +52,7 @@ public class User implements Serializable {
     private String type;
     
     @Column(name = "Sex", length = 1)
-    private char sex;
+    private Sex sex;
     
     @Column(name = "Status")//, nullable = true)
     private int status;
@@ -66,7 +66,7 @@ public class User implements Serializable {
         this.numberhouse = 0;
         this.neighborhood = "";
         this.password = "";
-        this.sex = 'm';
+        this.sex = Sex.F;
         this.status = 0;
         this.street = "";
         this.type = "";
@@ -113,7 +113,7 @@ public class User implements Serializable {
         return type;
     }
 
-    public char getSex() {
+    public Sex getSex() {
         return sex;
     }
 
@@ -157,7 +157,7 @@ public class User implements Serializable {
         this.type = type;
     }
 
-    public void setSex(char sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
@@ -167,18 +167,18 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 11 * hash + Objects.hashCode(this.id);
-        hash = 11 * hash + Objects.hashCode(this.name);
-        hash = 11 * hash + Objects.hashCode(this.street);
-        hash = 11 * hash + this.numberhouse;
-        hash = 11 * hash + Objects.hashCode(this.neighborhood);
-        hash = 11 * hash + Objects.hashCode(this.password);
-        hash = 11 * hash + Objects.hashCode(this.login);
-        hash = 11 * hash + Objects.hashCode(this.cpf);
-        hash = 11 * hash + Objects.hashCode(this.type);
-        hash = 11 * hash + this.sex;
-        hash = 11 * hash + this.status;
+        int hash = 3;
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + Objects.hashCode(this.street);
+        hash = 83 * hash + this.numberhouse;
+        hash = 83 * hash + Objects.hashCode(this.neighborhood);
+        hash = 83 * hash + Objects.hashCode(this.password);
+        hash = 83 * hash + Objects.hashCode(this.login);
+        hash = 83 * hash + Objects.hashCode(this.cpf);
+        hash = 83 * hash + Objects.hashCode(this.type);
+        hash = 83 * hash + Objects.hashCode(this.sex);
+        hash = 83 * hash + this.status;
         return hash;
     }
 
@@ -195,9 +195,6 @@ public class User implements Serializable {
         }
         final User other = (User) obj;
         if (this.numberhouse != other.numberhouse) {
-            return false;
-        }
-        if (this.sex != other.sex) {
             return false;
         }
         if (this.status != other.status) {
@@ -227,10 +224,12 @@ public class User implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+        if (this.sex != other.sex) {
+            return false;
+        }
         return true;
     }
-    
-    
+
     @Override
     public String toString() {
         return this.name;
