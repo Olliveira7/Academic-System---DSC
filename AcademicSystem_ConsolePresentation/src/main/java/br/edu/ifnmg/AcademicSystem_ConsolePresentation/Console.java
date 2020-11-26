@@ -71,7 +71,7 @@ public class Console {
 
           ProductRepository repo = new ProductDAO();
           Product p = new Product();
-          p.setName("hdhdhdhhd");
+          p.setName("hhhhh");
           
           if(repo.Save(p)){
             System.out.println("Sucesso");

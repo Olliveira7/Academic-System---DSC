@@ -43,10 +43,11 @@ public class Purchase implements Serializable {
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
     
+    @Column(name = "datetime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date datetime;
     
-    @Column(precision = 8, scale = 2)
+    @Column(precision = 8, scale = 2, name = "totalvalue")
     private BigDecimal totalvalue;
     
     private String description;
@@ -54,15 +55,28 @@ public class Purchase implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "purchase")
     private List<ItemPurchase> items;
     
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+    
     public Purchase(){
         this.id = 0L;
         this.supplier = null;
+        this.user = null;
         this.datetime = new Date();
         this.totalvalue = new BigDecimal("0.00");
         this.description = "";
         this.items = new ArrayList<>();
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     public Supplier getSupplier() {
         return supplier;
     }
@@ -131,15 +145,17 @@ public class Purchase implements Serializable {
         return false;
     
     }
-    
+
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 37 * hash + Objects.hashCode(this.id);
-        hash = 37 * hash + Objects.hashCode(this.supplier);
-        hash = 37 * hash + Objects.hashCode(this.datetime);
-        hash = 37 * hash + Objects.hashCode(this.totalvalue);
-        hash = 37 * hash + Objects.hashCode(this.description);
+        int hash = 3;
+        hash = 11 * hash + Objects.hashCode(this.id);
+        hash = 11 * hash + Objects.hashCode(this.supplier);
+        hash = 11 * hash + Objects.hashCode(this.datetime);
+        hash = 11 * hash + Objects.hashCode(this.totalvalue);
+        hash = 11 * hash + Objects.hashCode(this.description);
+        hash = 11 * hash + Objects.hashCode(this.items);
+        hash = 11 * hash + Objects.hashCode(this.user);
         return hash;
     }
 
@@ -170,9 +186,15 @@ public class Purchase implements Serializable {
         if (!Objects.equals(this.totalvalue, other.totalvalue)) {
             return false;
         }
+        if (!Objects.equals(this.items, other.items)) {
+            return false;
+        }
+        if (!Objects.equals(this.user, other.user)) {
+            return false;
+        }
         return true;
     }
-
+    
     @Override
     public String toString() {
         return this.id.toString();
