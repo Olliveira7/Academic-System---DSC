@@ -49,6 +49,14 @@ public class Record implements Serializable {
     @Column(name  = "description")
     private String description;
 
+    public Record(){
+        this.client = null;
+        this.datetime = new Date();
+        this.description = "";
+        this.id = 0L;
+        this.user = null;
+    }
+    
     public User getUser() {
         return user;
     }
