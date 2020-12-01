@@ -5,15 +5,17 @@
  */
 package br.edu.ifnmg.AcademicSystem_ConsolePresentation;
 
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ClientRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Product;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ProductRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Supplier;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SupplierRepository;
-import br.edu.ifnmg.AcademicSystem_Persitence.ClientDAO;
-import br.edu.ifnmg.AcademicSystem_Persitence.ProductDAO;
-import br.edu.ifnmg.AcademicSystem_Persitence.SupplierDAO;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -27,7 +29,7 @@ public class Console {
      */
     public static void main(String[] args) {
         
-//        System.out.println("111111111");
+            //        System.out.println("111111111");
 //        UserRepository repo = new UserDAO();
 //        System.out.println("22222222");
 //        User c = new User();
@@ -78,10 +80,24 @@ public class Console {
 //          }else{
 //            System.out.println("Falhoooooooo");
 //          }
-          ProductRepository repo = new ProductDAO();
-          Product p = repo.OpenName("dia");
-          System.out.println(p.getId());
-    
+//          ProductRepository repo = new ProductDAO();
+//          Product p = repo.OpenName("dia");
+//          System.out.println(p.getId());
+//    
+
+       
+        
+        UserRepository repo = RepositoryFactory.getUserRepository();
+        
+        User u = repo.Open(51L);
+        
+        System.out.println(u.getName());
+       
+        
+        
+        //Essa parte é para carregar aqueles dados na memória 
+        
+        
     }
     
     
