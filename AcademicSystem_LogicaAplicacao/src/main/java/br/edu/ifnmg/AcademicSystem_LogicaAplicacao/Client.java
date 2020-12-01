@@ -9,10 +9,13 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
@@ -51,8 +54,12 @@ public class Client implements Serializable {
     @Column(name = "telephone", length = 250)
     private String telephone;
     
+    @Enumerated(EnumType.STRING)
     @Column(name = "sex")
     private Sex sex;
+    
+    @Version
+    private int version;
     
     public Client(){
         this.sex = Sex.F;
@@ -65,6 +72,15 @@ public class Client implements Serializable {
         this.status = 1;
         this.street = "";
         this.telephone = "";
+        this.version = 1;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
     
     public Long getId() {

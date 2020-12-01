@@ -13,13 +13,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
  * @author diego
  */
 @Entity
-@Table(name = "suppliers")
+@Table(name = "Suppliers")
 public class Supplier implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,6 +52,9 @@ public class Supplier implements Serializable {
     @Column(length =  250)
     private String telephone;
     
+    @Version
+    private int version;
+    
     public Supplier(){
         this.cnpj = "";
         this.email = "";
@@ -61,8 +65,16 @@ public class Supplier implements Serializable {
         this.status = 0;
         this.street = "";
         this.telephone = "";
+        this.version = 1;
     }
-    
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
+    }
     
     public Long getId() {
         return id;

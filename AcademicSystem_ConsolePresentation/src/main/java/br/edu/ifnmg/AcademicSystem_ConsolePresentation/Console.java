@@ -69,15 +69,20 @@ public class Console {
 //            System.out.println("Falhoooooooo");
 //        }
 
+//          ProductRepository repo = new ProductDAO();
+//          Product p = new Product();
+//          p.setName("dia");
+//          
+//          if(repo.Save(p)){
+//            System.out.println("Sucesso");
+//          }else{
+//            System.out.println("Falhoooooooo");
+//          }
           ProductRepository repo = new ProductDAO();
-          Product p = new Product();
-          p.setName("plpl");
-          
-          if(repo.Save(p)){
-            System.out.println("Sucesso");
-          }else{
-            System.out.println("Falhoooooooo");
-          }
+          Product p = repo.OpenName("dia");
+          System.out.println(p.getId());
+    
     }
+    
     
 }

@@ -18,7 +18,7 @@ import javax.persistence.Persistence;
 public class DataAccessObject<T> implements Repository<T> {
     // é aqui que faz as operações de banco de dados 
     private Class type;
-    private EntityManager manager; //é a repsonsável em fazer tds as configurações de banco de dados
+    protected EntityManager manager; //é a repsonsável em fazer tds as configurações de banco de dados
     
     public DataAccessObject(Class type){// isso só serve para inicializar o gerenciador de entidade
         var factory = Persistence.createEntityManagerFactory("UP");//aqui tem que dá o nome que está no arquivo persitece

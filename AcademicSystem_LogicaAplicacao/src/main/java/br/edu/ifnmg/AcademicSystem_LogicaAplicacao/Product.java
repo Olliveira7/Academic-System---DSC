@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
@@ -42,6 +43,9 @@ public class Product implements Serializable {
     @Column(length = 500)
     private String description;
 
+    @Version
+    private int version;
+    
     public Product(){
         this.id = 0L;
         this.name = "";
@@ -49,6 +53,15 @@ public class Product implements Serializable {
         this.purchace_price = new BigDecimal("0.00");
         this.sale_price = new BigDecimal("0.00");
         this.status = 1;
+        this.version = 1;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
     
     public Long getId() {

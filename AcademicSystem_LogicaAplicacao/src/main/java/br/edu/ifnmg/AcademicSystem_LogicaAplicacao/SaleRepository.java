@@ -9,6 +9,6 @@ package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
  *
  * @author diego
  */
-public interface ProductRepository extends Repository<Product>{
-    public Product OpenName(String name);
+public interface SaleRepository extends Repository<Sale>{
+    
 }

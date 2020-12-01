@@ -9,10 +9,13 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 /**
  *
@@ -51,11 +54,15 @@ public class User implements Serializable {
     @Column(name = "Type", length = 15)//, nullable = true)
     private String type;
     
+    @Enumerated(EnumType.STRING)
     @Column(name = "Sex", length = 1)
     private Sex sex;
     
     @Column(name = "Status")//, nullable = true)
     private int status;
+    
+    @Version
+    private int version;
     
     public User(){
         //tipos long se inicializa com 0L
@@ -70,11 +77,19 @@ public class User implements Serializable {
         this.status = 0;
         this.street = "";
         this.type = "";
-        
+        this.version = 1;
     }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 
     public Long getId() {
