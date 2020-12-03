@@ -75,4 +75,51 @@ public class RepositoryFactory {
         return user;
     }
     
+    public static ClientRepository getClientRepository(){
+        if(client == null){
+            String nameClass = properties.getProperty("ClientRepository");
+            client = (ClientRepository) getInstance(nameClass);
+        }
+        return client;
+    }
+    
+    public static SupplierRepository getSupplierRepository(){
+        if(supplier == null){
+            String nameClass = properties.getProperty("SupplierRepository");
+            supplier = (SupplierRepository) getInstance(nameClass);
+        }
+        return supplier;
+    }
+    
+    public static ProductRepository getProductRepository(){
+        if(product == null){
+            String nameClass = properties.getProperty("ProductRepository");
+            product = (ProductRepository) getInstance(nameClass);
+        }
+        return product;
+    }
+    
+    public static PlanRepository getPlanRepository(){
+        if(plan == null){
+            String nameClass = properties.getProperty("PlanRepository");
+            plan = (PlanRepository) getInstance(nameClass);
+        }
+        return plan;
+    }
+    
+    public static PurchaseRepository getPurchaseRepository(){
+        if(purchase == null){
+            String nameClass = properties.getProperty("PurchaseRepository");
+            purchase = (PurchaseRepository) getInstance(nameClass);
+        }
+        return purchase;
+    }
+    
+    public static SaleRepository getSaleRepository(){
+        if(sale == null){
+            String nameClass = properties.getProperty("SaleRepository");
+            sale = (SaleRepository) getInstance(nameClass);
+        }
+        return sale;
+    }
 }

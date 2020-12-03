@@ -5,17 +5,8 @@
  */
 package br.edu.ifnmg.AcademicSystem_ConsolePresentation;
 
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 
 
 /**
@@ -87,13 +78,16 @@ public class Console {
 
        
         
-        UserRepository repo = RepositoryFactory.getUserRepository();
-        
-        User u = repo.Open(51L);
-        
-        System.out.println(u.getName());
+//        UserRepository repo = RepositoryFactory.getUserRepository();
+//        
+//        User u = repo.Open(51L);
+//        
+//        System.out.println(u.getName());
        
-        
+        ArrayList<User> list = new ArrayList<>();
+        User u = new User();
+        u.setCpf("hhhh");
+        list.add(u);
         
         //Essa parte é para carregar aqueles dados na memória 
         
