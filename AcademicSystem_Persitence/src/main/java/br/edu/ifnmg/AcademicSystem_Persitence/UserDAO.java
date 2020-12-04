@@ -7,6 +7,7 @@ package br.edu.ifnmg.AcademicSystem_Persitence;
 
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
+import javax.persistence.Query;
 
 /**
  *
@@ -19,8 +20,15 @@ public class UserDAO extends DataAccessObject<User> implements UserRepository{
     }
     
     @Override
-    public boolean login(String user, String senha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean login(String login, String password) {
+        Query sql = this.manager.createQuery("select l from User l where l.login = :login and l.password = :password");
+        sql.setParameter("login", login);
+        sql.setParameter("password", password);
+        
+        if(sql.getResultList().size() > 0){
+            return true;
+        }
+        return false;
     }
     
      

@@ -5,7 +5,9 @@
  */
 package br.edu.ifnmg.AcademicSystem_ConsolePresentation;
 
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
 import java.util.ArrayList;
 
 
@@ -78,17 +80,21 @@ public class Console {
 
        
         
-//        UserRepository repo = RepositoryFactory.getUserRepository();
-//        
-//        User u = repo.Open(51L);
-//        
+        UserRepository repo = RepositoryFactory.getUserRepository();
+        
+        User u = new User();
+//        u.setCpf("1234");
+//        u.setName("bom");
+//        u.setLogin("dado");
+//        u.setPassword("123");
+//        repo.Save(u);
 //        System.out.println(u.getName());
        
-        ArrayList<User> list = new ArrayList<>();
-        User u = new User();
-        u.setCpf("hhhh");
-        list.add(u);
-        
+       if(repo.login("dado", "123") == true){
+           System.out.println("Deu certo");
+       }else{
+           System.out.println("Deu errado");
+       }
         //Essa parte é para carregar aqueles dados na memória 
         
         
