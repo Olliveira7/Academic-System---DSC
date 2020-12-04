@@ -6,6 +6,7 @@
 package br.edu.ifnmg.AcademicSystem_Presentation_Desktop;
 
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
 import javax.swing.JOptionPane;
 
@@ -16,14 +17,14 @@ import javax.swing.JOptionPane;
 public class Login_frm extends javax.swing.JFrame {
 
     UserRepository repository;
-    
+    User user = new User();
     /**
      * Creates new form Login_frm
      */
     public Login_frm() {
         
         repository = RepositoryFactory.getUserRepository();
-        
+        user = null;
         initComponents();
     }
 
@@ -139,8 +140,10 @@ public class Login_frm extends javax.swing.JFrame {
         String password = String.valueOf(txtPassword.getPassword());//aqui libera um array de caracteres, nesse ponto converte para satring
         
         if(login.length() > 0 && password.length() > 0){// sinal de and
-            if(repository.login(login, password)){
+            user = repository.login(login, password);
+            if(user != null){
                 Main screen = new Main();
+                screen.setUser(user);
                 screen.setVisible(true);
                 this.setVisible(false);
             }else{//Mensagem de erro, para no caso de usuário não existe

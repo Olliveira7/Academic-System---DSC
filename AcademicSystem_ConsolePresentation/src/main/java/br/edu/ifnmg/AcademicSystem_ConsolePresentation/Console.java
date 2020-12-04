@@ -89,9 +89,9 @@ public class Console {
 //        u.setPassword("123");
 //        repo.Save(u);
 //        System.out.println(u.getName());
-       
-       if(repo.login("dado", "123") == true){
-           System.out.println("Deu certo");
+       u = repo.login("dado", "123");
+       if(u != null){
+           System.out.println(u.getId());
        }else{
            System.out.println("Deu errado");
        }

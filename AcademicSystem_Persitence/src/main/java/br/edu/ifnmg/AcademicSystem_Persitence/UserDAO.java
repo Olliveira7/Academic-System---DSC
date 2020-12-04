@@ -20,15 +20,16 @@ public class UserDAO extends DataAccessObject<User> implements UserRepository{
     }
     
     @Override
-    public boolean login(String login, String password) {
+    public User login(String login, String password) {
         Query sql = this.manager.createQuery("select l from User l where l.login = :login and l.password = :password");
         sql.setParameter("login", login);
         sql.setParameter("password", password);
         
         if(sql.getResultList().size() > 0){
-            return true;
+            User u = (User) sql.getSingleResult();
+            return u;
         }
-        return false;
+        return null;
     }
     
      
