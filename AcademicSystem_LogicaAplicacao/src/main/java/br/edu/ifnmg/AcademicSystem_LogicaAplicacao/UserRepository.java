@@ -5,11 +5,14 @@
  */
 package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
 
+import java.util.List;
+
 /**
  *
  * @author diego
  */
 public interface UserRepository extends Repository<User> {
     public User login(String login, String password);
+    public List<User> Search(User u);
 }
 

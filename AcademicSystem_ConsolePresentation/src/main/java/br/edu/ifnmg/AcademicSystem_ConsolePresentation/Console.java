@@ -85,32 +85,41 @@ public class Console {
 //          System.out.println(p.getId());
 //    
 
+          User u = new User();
+          u.setLogin("dado");
+          UserRepository repoU = RepositoryFactory.getUserRepository();
+          for(User p: repoU.Search(u)){
+              System.out.println(p);
+          
+          }
        
         
-        SaleRepository repoS = RepositoryFactory.getSaleRepository();
-        UserRepository repoU = RepositoryFactory.getUserRepository();
-        ClientRepository repoC = RepositoryFactory.getClientRepository();
-        ProductRepository repoP = RepositoryFactory.getProductRepository();
-        
-        Sale s = new Sale();
-        User u = new User();
-        Product p = new Product();
-        Client c = new Client();
-        
-        c = repoC.Open(151L);
-        u = repoU.Open(51L);
-        p = repoP.Open(1L);
-        
-        ItemSale i = new ItemSale(p,5);
-        i.setSale(s);
-        s.setClient(c);
-        s.add(i);
-        s.setUser(u);
-        
-        repoS.Save(s);
-//        u.setCpf("1234");
-//        u.setName("bom");
-//        u.setLogin("dado");
+//        SaleRepository repoS = RepositoryFactory.getSaleRepository();
+//        UserRepository repoU = RepositoryFactory.getUserRepository();
+//        ClientRepository repoC = RepositoryFactory.getClientRepository();
+//        ProductRepository repoP = RepositoryFactory.getProductRepository();
+//        
+//        Sale s = new Sale();
+//        User u = new User();
+//        Product p = new Product();
+//        Client c = new Client();
+//        
+//        c = repoC.Open(151L);
+//        u = repoU.Open(51L);
+//        p = repoP.Open(1L);
+//        
+//        ItemSale i = new ItemSale(p,5);
+//        i.setSale(s);
+//        s.setClient(c);
+//        s.add(i);
+//        s.setUser(u);
+//        
+//        repoS.Save(s);
+//        User u = new User();
+//        UserRepository repo = RepositoryFactory.getUserRepository();
+//        u.setCpf("555");
+//        u.setName("user");
+//        u.setLogin("user");
 //        u.setPassword("123");
 //        repo.Save(u);
 //        System.out.println(u.getName());

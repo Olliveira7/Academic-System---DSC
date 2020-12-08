@@ -7,6 +7,8 @@ package br.edu.ifnmg.AcademicSystem_Persitence;
 
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
+import java.util.HashMap;
+import java.util.List;
 import javax.persistence.Query;
 
 /**
@@ -30,6 +32,44 @@ public class UserDAO extends DataAccessObject<User> implements UserRepository{
             return u;
         }
         return null;
+    }
+
+    @Override
+    public List<User> Search(User obj) {
+        String jpql = "select o from User o";
+        
+        HashMap <String, Object> parameter = new HashMap<>();
+        
+        if(obj != null){
+            if(obj.getLogin() != null & !obj.getLogin().isEmpty()){
+                parameter.put("login", obj.getLogin());
+            }
+            if(obj.getId() > 0){
+                parameter.put("id", obj.getId());
+            }
+        }
+        
+        if(!parameter.isEmpty()){
+            String filter = "";
+            jpql += " where ";
+            for(String field : parameter.keySet()){
+                if(!filter.isEmpty()){
+                    filter += " and ";
+                }
+                jpql += "o." + field + " = :" + field;
+            }
+            jpql += filter;
+        }
+        
+        Query sql = this.manager.createQuery(jpql);
+        
+        if(!parameter.isEmpty()){
+            for(String field : parameter.keySet()){
+                sql.setParameter(field, parameter.get(field));
+            }
+        }
+        
+        return sql.getResultList();
     }
     
      
