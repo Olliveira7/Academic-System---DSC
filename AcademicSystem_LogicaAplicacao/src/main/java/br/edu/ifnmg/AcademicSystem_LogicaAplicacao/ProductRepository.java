@@ -5,10 +5,12 @@
  */
 package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
 
+import java.util.List;
+
 /**
  *
  * @author diego
  */
 public interface ProductRepository extends Repository<Product>{
-    public Product OpenName(String name);
+    public List<Product> OpenName(String name);
 }

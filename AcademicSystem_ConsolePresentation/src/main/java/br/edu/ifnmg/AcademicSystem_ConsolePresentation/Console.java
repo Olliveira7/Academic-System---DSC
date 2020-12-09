@@ -15,7 +15,9 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Sale;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SaleRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -71,33 +73,37 @@ public class Console {
 //            System.out.println("Falhoooooooo");
 //        }
 
-//          ProductRepository repo = new ProductDAO();
-//          Product p = new Product();
-//          p.setName("dia");
-//          
-//          if(repo.Save(p)){
-//            System.out.println("Sucesso");
-//          }else{
-//            System.out.println("Falhoooooooo");
-//          }
-//          ProductRepository repo = new ProductDAO();
-//          Product p = repo.OpenName("dia");
-//          System.out.println(p.getId());
-//    
-
-          User u = new User();
-          u.setLogin("dado");
-          UserRepository repoU = RepositoryFactory.getUserRepository();
-          for(User p: repoU.Search(u)){
-              System.out.println(p);
+          ProductRepository repo = RepositoryFactory.getProductRepository();
+          Product p = new Product();
+          p.setName("Bom");
+          p.setPurchace_price(BigDecimal.valueOf(1.5d));
+          p.setSale_price(BigDecimal.valueOf(5.4d));
           
+          if(repo.Save(p)){
+            System.out.println("Sucesso");
+          }else{
+            System.out.println("Falhoooooooo");
           }
-       
+          //ProductRepository repoo = RepositoryFactory.getProductRepository();
+          //Product po = repo.OpenName("dia");
+          //System.out.println(p.getId());
+//    
+//
+//          User u = new User();
+//          u.setLogin("dado");
+//          UserRepository repoU = RepositoryFactory.getUserRepository();
+//          for(User p: repoU.Search(u)){
+//              System.out.println(p);
+//          
+//          }
+//       
         
 //        SaleRepository repoS = RepositoryFactory.getSaleRepository();
 //        UserRepository repoU = RepositoryFactory.getUserRepository();
 //        ClientRepository repoC = RepositoryFactory.getClientRepository();
 //        ProductRepository repoP = RepositoryFactory.getProductRepository();
+//        
+//        
 //        
 //        Sale s = new Sale();
 //        User u = new User();
@@ -115,6 +121,7 @@ public class Console {
 //        s.setUser(u);
 //        
 //        repoS.Save(s);
+        
 //        User u = new User();
 //        UserRepository repo = RepositoryFactory.getUserRepository();
 //        u.setCpf("555");
@@ -132,6 +139,12 @@ public class Console {
         //Essa parte é para carregar aqueles dados na memória 
         
         
+//        ProductRepository repo = RepositoryFactory.getProductRepository();
+//        List<Product> pros = repo.OpenName("dia");
+//        for(Product product : pros){
+//            System.out.println(product.getName());
+//        }
+//        
     }
     
     
