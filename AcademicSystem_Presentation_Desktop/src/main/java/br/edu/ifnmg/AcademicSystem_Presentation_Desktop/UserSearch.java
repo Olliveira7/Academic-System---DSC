@@ -73,6 +73,11 @@ public class UserSearch extends javax.swing.JInternalFrame {
         });
 
         btnNew.setText("New");
+        btnNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewActionPerformed(evt);
+            }
+        });
 
         tblResult.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -189,6 +194,14 @@ public class UserSearch extends javax.swing.JInternalFrame {
             tblResult.setModel(model);
         }
     }//GEN-LAST:event_btnCleanActionPerformed
+
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        User u = repositoryUser.Open(51L);
+        UserEdit screen = new UserEdit();
+        this.getParent().add(screen);
+        screen.setVisible(true);
+        screen.setUser(u);
+    }//GEN-LAST:event_btnNewActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

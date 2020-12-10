@@ -54,9 +54,15 @@ public class User implements Serializable {
     @Column(name = "Type", length = 15)//, nullable = true)
     private String type;
     
+    @Column(name = "Email", length = 35)//, nullable = true)
+    private String email;
+    
     @Enumerated(EnumType.STRING)
-    @Column(name = "Sex", length = 1)
+    @Column(name = "Sex", length = 10)
     private Sex sex;
+    
+    @Column(name = "Telephone", length = 15)//, nullable = true)
+    private String telephone;
     
     @Column(name = "Status")//, nullable = true)
     private int status;
@@ -73,11 +79,13 @@ public class User implements Serializable {
         this.numberhouse = 0;
         this.neighborhood = "";
         this.password = "";
-        this.sex = Sex.F;
+        this.sex = Sex.Female;
         this.status = 0;
         this.street = "";
         this.type = "";
         this.version = 1;
+        this.email = "";
+        this.telephone = "";
     }
 
     public static long getSerialVersionUID() {
@@ -92,6 +100,22 @@ public class User implements Serializable {
         this.version = version;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+    
     public Long getId() {
         return id;
     }
@@ -182,18 +206,21 @@ public class User implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 83 * hash + Objects.hashCode(this.id);
-        hash = 83 * hash + Objects.hashCode(this.name);
-        hash = 83 * hash + Objects.hashCode(this.street);
-        hash = 83 * hash + this.numberhouse;
-        hash = 83 * hash + Objects.hashCode(this.neighborhood);
-        hash = 83 * hash + Objects.hashCode(this.password);
-        hash = 83 * hash + Objects.hashCode(this.login);
-        hash = 83 * hash + Objects.hashCode(this.cpf);
-        hash = 83 * hash + Objects.hashCode(this.type);
-        hash = 83 * hash + Objects.hashCode(this.sex);
-        hash = 83 * hash + this.status;
+        int hash = 7;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.street);
+        hash = 79 * hash + this.numberhouse;
+        hash = 79 * hash + Objects.hashCode(this.neighborhood);
+        hash = 79 * hash + Objects.hashCode(this.password);
+        hash = 79 * hash + Objects.hashCode(this.login);
+        hash = 79 * hash + Objects.hashCode(this.cpf);
+        hash = 79 * hash + Objects.hashCode(this.type);
+        hash = 79 * hash + Objects.hashCode(this.email);
+        hash = 79 * hash + Objects.hashCode(this.sex);
+        hash = 79 * hash + Objects.hashCode(this.telephone);
+        hash = 79 * hash + this.status;
+        hash = 79 * hash + this.version;
         return hash;
     }
 
@@ -213,6 +240,9 @@ public class User implements Serializable {
             return false;
         }
         if (this.status != other.status) {
+            return false;
+        }
+        if (this.version != other.version) {
             return false;
         }
         if (!Objects.equals(this.name, other.name)) {
@@ -236,6 +266,12 @@ public class User implements Serializable {
         if (!Objects.equals(this.type, other.type)) {
             return false;
         }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.telephone, other.telephone)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -244,7 +280,7 @@ public class User implements Serializable {
         }
         return true;
     }
-
+    
     @Override
     public String toString() {
         return this.name;

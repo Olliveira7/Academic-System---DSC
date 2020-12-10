@@ -62,7 +62,7 @@ public class Client implements Serializable {
     private int version;
     
     public Client(){
-        this.sex = Sex.F;
+        this.sex = Sex.Female;
         this.cpf = "";
         this.email = "";
         this.id = 0L;

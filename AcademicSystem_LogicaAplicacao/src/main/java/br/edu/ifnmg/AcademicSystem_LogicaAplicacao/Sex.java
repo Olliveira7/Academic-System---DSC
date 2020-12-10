@@ -10,6 +10,6 @@ package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
  * @author diego
  */
 public enum Sex {
-    M,
-    F
+    Male,
+    Female
 }

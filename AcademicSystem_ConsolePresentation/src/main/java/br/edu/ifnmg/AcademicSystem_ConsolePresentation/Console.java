@@ -73,17 +73,17 @@ public class Console {
 //            System.out.println("Falhoooooooo");
 //        }
 
-          ProductRepository repo = RepositoryFactory.getProductRepository();
-          Product p = new Product();
-          p.setName("Bom");
-          p.setPurchace_price(BigDecimal.valueOf(1.5d));
-          p.setSale_price(BigDecimal.valueOf(5.4d));
-          
-          if(repo.Save(p)){
-            System.out.println("Sucesso");
-          }else{
-            System.out.println("Falhoooooooo");
-          }
+//          ProductRepository repo = RepositoryFactory.getProductRepository();
+//          Product p = new Product();
+//          p.setName("Bom");
+//          p.setPurchace_price(BigDecimal.valueOf(1.5d));
+//          p.setSale_price(BigDecimal.valueOf(5.4d));
+//          
+//          if(repo.Save(p)){
+//            System.out.println("Sucesso");
+//          }else{
+//            System.out.println("Falhoooooooo");
+//          }
           //ProductRepository repoo = RepositoryFactory.getProductRepository();
           //Product po = repo.OpenName("dia");
           //System.out.println(p.getId());
@@ -121,21 +121,22 @@ public class Console {
 //        s.setUser(u);
 //        
 //        repoS.Save(s);
+        System.out.println("oiiiiiiii");
+        User u = new User();
+        System.out.println("oiiiiiiii");
+        UserRepository repo = RepositoryFactory.getUserRepository();
+        u.setCpf("1111");
+        u.setName("adm");
+        u.setLogin("adm");
+        u.setPassword("123");
+        u.setEmail("aaaaa@gmail.com");
+        u.setStatus(1);
+        u.setType("executivo");
+        repo.Save(u);
+        System.out.println(u.getName());
         
-//        User u = new User();
-//        UserRepository repo = RepositoryFactory.getUserRepository();
-//        u.setCpf("555");
-//        u.setName("user");
-//        u.setLogin("user");
-//        u.setPassword("123");
-//        repo.Save(u);
-//        System.out.println(u.getName());
-//       u = repo.login("dado", "123");
-//       if(u != null){
-//           System.out.println(u.getId());
-//       }else{
-//           System.out.println("Deu errado");
-//       }
+        
+        
         //Essa parte é para carregar aqueles dados na memória 
         
         
