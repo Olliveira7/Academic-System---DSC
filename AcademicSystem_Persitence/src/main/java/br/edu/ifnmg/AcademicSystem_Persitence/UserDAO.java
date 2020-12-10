@@ -71,6 +71,16 @@ public class UserDAO extends DataAccessObject<User> implements UserRepository{
         
         return sql.getResultList();
     }
+
+    @Override
+    public void DeleteId(String login) {
+        
+        Query query = this.manager.createQuery("delete o from User o where o.login = :login1");
+        query.setParameter("login1", login);
+        
+        int result = query.executeUpdate();
+        
+    }
     
      
 }

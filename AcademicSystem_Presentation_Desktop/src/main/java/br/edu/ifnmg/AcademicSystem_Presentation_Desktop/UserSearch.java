@@ -196,11 +196,11 @@ public class UserSearch extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCleanActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        User u = repositoryUser.Open(51L);
-        UserEdit screen = new UserEdit();
+        
+        UserRegister screen = new UserRegister();
         this.getParent().add(screen);
         screen.setVisible(true);
-        screen.setUser(u);
+   
     }//GEN-LAST:event_btnNewActionPerformed
 
 

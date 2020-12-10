@@ -80,7 +80,7 @@ public class User implements Serializable {
         this.neighborhood = "";
         this.password = "";
         this.sex = Sex.Female;
-        this.status = 0;
+        this.status = 1;
         this.street = "";
         this.type = "";
         this.version = 1;
