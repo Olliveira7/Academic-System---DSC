@@ -126,18 +126,24 @@ public class Console {
 //        System.out.println("oiiiiiiii");
 //        UserRepository repo = RepositoryFactory.getUserRepository();
 //        u.setCpf("1112");
-//        u.setName("abc");
-//        u.setLogin("abc");
+//        u.setName("def");
+//        u.setLogin("def");
 //        u.setPassword("123");
 //        u.setEmail("kkkkkkk@gmail.com");
 //        u.setStatus(1);
 //        u.setType("executivo");
 //        repo.Save(u);
 //        System.out.println(u.getName());
-        
-          
+//        
+          System.out.println("Deu");
           UserRepository repo = RepositoryFactory.getUserRepository();
-          repo.DeleteId("abc");
+          System.out.println("certo");
+          //repo.Open(null);
+          if(repo.DeleteLogin("abc") == true){
+              System.out.println("Deu certo");
+          }else{
+              System.out.println("Deu errado");
+          }
         
         //Essa parte é para carregar aqueles dados na memória 
         

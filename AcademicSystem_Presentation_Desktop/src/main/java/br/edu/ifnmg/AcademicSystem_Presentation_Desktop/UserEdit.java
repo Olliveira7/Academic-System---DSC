@@ -461,6 +461,7 @@ public class UserEdit extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(null, "The login, password, CPF and name must be completed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        this.user = new User();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed

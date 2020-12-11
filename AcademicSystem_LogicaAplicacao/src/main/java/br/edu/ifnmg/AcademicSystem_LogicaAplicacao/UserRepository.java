@@ -14,6 +14,6 @@ import java.util.List;
 public interface UserRepository extends Repository<User> {
     public User login(String login, String password);
     public List<User> Search(User u);
-    public void DeleteId(String login);
+    public boolean DeleteLogin(String login);
 }
 

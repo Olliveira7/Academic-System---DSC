@@ -9,6 +9,7 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
 import java.util.HashMap;
 import java.util.List;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 /**
@@ -73,13 +74,31 @@ public class UserDAO extends DataAccessObject<User> implements UserRepository{
     }
 
     @Override
-    public void DeleteId(String login) {
+    public boolean DeleteLogin(String login) {
         
-        Query query = this.manager.createQuery("delete o from User o where o.login = :login1");
-        query.setParameter("login1", login);
+        String jpql = "delete from User o where o.login = :login";
         
-        int result = query.executeUpdate();
+        EntityTransaction transaction = this.manager.getTransaction();
+        try{
+            transaction.begin();// inicia a transação
+            
+            Query sql = this.manager.createQuery(jpql);
+            sql.setParameter("login", login);
+
+            if(sql.executeUpdate() > 0){//Até aqui é simulado a transação e não consecutivamente a transação
+                transaction.commit(); // Aqui é relalizado efetivamente a trasanção/ Finalia a transação
+                return true;
+            }
+        }catch(Exception exeption){
+            transaction.rollback();
+            System.out.println("Exceção: " + exeption);
+            return false;
+        }
         
+        
+        
+   
+        return false;
     }
     
      
