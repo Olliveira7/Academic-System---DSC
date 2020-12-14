@@ -9,6 +9,7 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ClientRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Sex;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -137,10 +138,25 @@ public class ClientEdit extends javax.swing.JInternalFrame {
         cbbSex.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female" }));
 
         btnSave.setText("Save");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -255,6 +271,50 @@ public class ClientEdit extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        
+        if(!this.txtCPF.getText().isEmpty() && !this.txtName.getText().isEmpty()){
+            if(JOptionPane.showConfirmDialog(this, "Really want to save?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                this.getComponent();
+                if(repository.Save(client)){
+                    JOptionPane.showMessageDialog(this, "Client saved!","Information", JOptionPane.INFORMATION_MESSAGE);
+                    if(JOptionPane.showConfirmDialog(this, "Do you want to edit another client?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                        ClientSelect screen = new ClientSelect();
+                        this.getParent().add(screen);
+                        screen.setVisible(true);
+                        this.setVisible(false);
+                    }else{
+                        this.setVisible(false);
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Client is not saved!","Erro", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Operation canceled!","Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "The CPF and name must be completed!", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        if(JOptionPane.showConfirmDialog(this, "Do you want to remove a client?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+            if(this.repository.Delete(client)){
+                JOptionPane.showMessageDialog(this, "Client removed!","Information", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this, "Client is not removed!","Erro", JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            JOptionPane.showMessageDialog(this, "Operation canceled!","Information", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        if(JOptionPane.showConfirmDialog(this, "Do you really want to cancel?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
