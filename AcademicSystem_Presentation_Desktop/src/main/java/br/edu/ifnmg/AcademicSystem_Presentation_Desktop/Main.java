@@ -93,6 +93,11 @@ public class Main extends javax.swing.JFrame {
         jMenu3.setText("Client");
 
         jMenuItem7.setText("Register");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem7);
 
         jMenuItem8.setText("Edit");
@@ -104,6 +109,11 @@ public class Main extends javax.swing.JFrame {
         jMenu3.add(jMenuItem8);
 
         jMenuItem9.setText("Search");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem9);
 
         jMenuBar1.add(jMenu3);
@@ -185,6 +195,18 @@ public class Main extends javax.swing.JFrame {
         this.add(screen);
         screen.setVisible(true);
     }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        ClientSearch screen = new ClientSearch();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        ClientRegister screen = new ClientRegister();
+        this.add(screen);
+        this.setVisible(true);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments

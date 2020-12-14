@@ -176,18 +176,28 @@ public class Console {
 //        }
 //        
 
-          ClientRepository repo = RepositoryFactory.getClientRepository();
-          Client p = new Client();
-          
-          p.setCpf("15454948");
-          p.setEmail("amorcari@gmial.com");
-          p.setName("Andre");
-          p.setNeighborhood("caridade");
-          p.setNumberhouse(15);
-          p.setSex(Sex.Male);
-          p.setStreet("amaro");
-          p.setTelephone("389444444444");
-          repo.Save(p);
+            int value = 50;
+            String k = "80";
+            if(value == Integer.SIZE){
+             System.out.println("É um inteiro");
+            }
+            
+            if(Integer.valueOf(k) == Integer.SIZE){
+                System.out.println("É um inteiro - String");
+            }
+
+//          ClientRepository repo = RepositoryFactory.getClientRepository();
+//          Client p = new Client();
+//          
+//          p.setCpf("15454948");
+//          p.setEmail("amorcari@gmial.com");
+//          p.setName("Andre");
+//          p.setNeighborhood("caridade");
+//          p.setNumberhouse(15);
+//          p.setSex(Sex.Male);
+//          p.setStreet("amaro");
+//          p.setTelephone("389444444444");
+//          repo.Save(p);
     }
     
     
