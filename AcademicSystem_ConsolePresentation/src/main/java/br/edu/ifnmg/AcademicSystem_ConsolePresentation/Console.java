@@ -13,6 +13,7 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ProductRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Sale;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SaleRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Sex;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
 import java.math.BigDecimal;
@@ -52,11 +53,21 @@ public class Console {
 //        System.out.println(c.getName() + " , " + c.getCpf());
 //        
 //        ClientRepository repo = RepositoryFactory.getClientRepository();
+//        
+//        
 //        System.out.println("22222222");
 //        Client c = new Client();
+//        Client b = new Client();
+//        Client a = new Client();
 //        c.setCpf("123");
 //        c.setName("Maria");
+//        a.setCpf("45600");
+//        a.setName("João");
+//        b.setCpf("789");
+//        b.setName("Carlos");
 //        if(repo.Save(c)){
+//            repo.Save(b);
+//            repo.Save(a);
 //            System.out.println("Sucesso");
 //        }else{
 //            System.out.println("Falhoooooooo");
@@ -135,17 +146,27 @@ public class Console {
 //        repo.Save(u);
 //        System.out.println(u.getName());
 //        
-          System.out.println("Deu");
-          UserRepository repo = RepositoryFactory.getUserRepository();
-          System.out.println("certo");
-          //repo.Open(null);
-          if(repo.DeleteLogin("abc") == true){
-              System.out.println("Deu certo");
-          }else{
-              System.out.println("Deu errado");
-          }
+//          System.out.println("Deu");
+//          UserRepository repo = RepositoryFactory.getUserRepository();
+//          System.out.println("certo");
+//          //repo.Open(null);
+//          if(repo.DeleteLogin("abc") == true){
+//              System.out.println("Deu certo");
+//          }else{
+//              System.out.println("Deu errado");
+//          }
         
         //Essa parte é para carregar aqueles dados na memória 
+        
+        
+//        ClientRepository repo = RepositoryFactory.getClientRepository();
+//        Client p = new Client();
+//        p.setId(91L);
+//        
+//        List<Client> list = repo.Search(p);
+//        for(Client client: list){
+//            System.out.println();
+//        }
         
         
 //        ProductRepository repo = RepositoryFactory.getProductRepository();
@@ -154,6 +175,19 @@ public class Console {
 //            System.out.println(product.getName());
 //        }
 //        
+
+          ClientRepository repo = RepositoryFactory.getClientRepository();
+          Client p = new Client();
+          
+          p.setCpf("15454948");
+          p.setEmail("amorcari@gmial.com");
+          p.setName("Andre");
+          p.setNeighborhood("caridade");
+          p.setNumberhouse(15);
+          p.setSex(Sex.Male);
+          p.setStreet("amaro");
+          p.setTelephone("389444444444");
+          repo.Save(p);
     }
     
     

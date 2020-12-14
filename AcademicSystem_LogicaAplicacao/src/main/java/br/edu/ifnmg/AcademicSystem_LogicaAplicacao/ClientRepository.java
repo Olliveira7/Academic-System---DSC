@@ -5,10 +5,12 @@
  */
 package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
 
+import java.util.List;
+
 /**
  *
  * @author diego
  */
 public interface ClientRepository extends Repository<Client> {
-    
+    public List<Client> Search(Client client);
 }

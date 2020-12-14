@@ -55,6 +55,11 @@ public class UserSelect extends javax.swing.JInternalFrame {
         jLabel3.setText("ID:");
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnContinue1.setText("Continue");
         btnContinue1.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +124,7 @@ public class UserSelect extends javax.swing.JInternalFrame {
                 }
             }
             if(value == 1){
-                if(JOptionPane.showConfirmDialog(this, "This is Login" + user.getLogin() + ", with Name "+ user.getName() +"?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                if(JOptionPane.showConfirmDialog(this, "This is Login: " + user.getLogin() + ", with Name: "+ user.getName() +"?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
                     UserEdit screen = new UserEdit();
                     this.getParent().add(screen);
                     screen.setVisible(true);
@@ -137,6 +142,12 @@ public class UserSelect extends javax.swing.JInternalFrame {
         }
         this.user = new User();
     }//GEN-LAST:event_btnContinue1ActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        if(JOptionPane.showConfirmDialog(this, "Really want to cancel?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
