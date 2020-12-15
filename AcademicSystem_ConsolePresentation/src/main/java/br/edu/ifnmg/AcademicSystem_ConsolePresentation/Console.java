@@ -86,9 +86,9 @@ public class Console {
 
 //          ProductRepository repo = RepositoryFactory.getProductRepository();
 //          Product p = new Product();
-//          p.setName("Bom");
-//          p.setPurchace_price(BigDecimal.valueOf(1.5d));
-//          p.setSale_price(BigDecimal.valueOf(5.4d));
+//          p.setName("Banana");
+//          p.setPurchace_price(BigDecimal.valueOf(4.5d));
+//          p.setSale_price(BigDecimal.valueOf(20d));
 //          
 //          if(repo.Save(p)){
 //            System.out.println("Sucesso");
@@ -109,29 +109,34 @@ public class Console {
 //          }
 //       
         
-//        SaleRepository repoS = RepositoryFactory.getSaleRepository();
-//        UserRepository repoU = RepositoryFactory.getUserRepository();
-//        ClientRepository repoC = RepositoryFactory.getClientRepository();
-//        ProductRepository repoP = RepositoryFactory.getProductRepository();
-//        
-//        
-//        
-//        Sale s = new Sale();
-//        User u = new User();
-//        Product p = new Product();
-//        Client c = new Client();
-//        
-//        c = repoC.Open(151L);
-//        u = repoU.Open(51L);
-//        p = repoP.Open(1L);
-//        
-//        ItemSale i = new ItemSale(p,5);
-//        i.setSale(s);
-//        s.setClient(c);
-//        s.add(i);
-//        s.setUser(u);
-//        
-//        repoS.Save(s);
+        SaleRepository repoS = RepositoryFactory.getSaleRepository();
+        UserRepository repoU = RepositoryFactory.getUserRepository();
+        ClientRepository repoC = RepositoryFactory.getClientRepository();
+        ProductRepository repoP = RepositoryFactory.getProductRepository();
+        
+        
+        
+        Sale s = new Sale();
+        User u = new User();
+        Product p = new Product();
+        Client c = new Client();
+        Product v = new Product();
+        
+        c = repoC.Open(251L);
+        u = repoU.Open(1L);
+        p = repoP.Open(401L);
+        v = repoP.Open(451L);
+        
+        ItemSale i = new ItemSale(p,5);
+        ItemSale e = new ItemSale(v,10);
+        i.setSale(s);
+        e.setSale(s);
+        s.setClient(c);
+        s.add(i);
+        s.add(e);
+        s.setUser(u);
+        
+        repoS.Save(s);
 //        System.out.println("oiiiiiiii");
 //        User u = new User();
 //        System.out.println("oiiiiiiii");
@@ -175,16 +180,6 @@ public class Console {
 //            System.out.println(product.getName());
 //        }
 //        
-
-            int value = 50;
-            String k = "80";
-            if(value == Integer.SIZE){
-             System.out.println("É um inteiro");
-            }
-            
-            if(Integer.valueOf(k) == Integer.SIZE){
-                System.out.println("É um inteiro - String");
-            }
 
 //          ClientRepository repo = RepositoryFactory.getClientRepository();
 //          Client p = new Client();

@@ -42,7 +42,7 @@ public class Product implements Serializable {
     
     @Column(length = 500)
     private String description;
-
+    
     @Version
     private int version;
     

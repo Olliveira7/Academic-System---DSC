@@ -5,10 +5,12 @@
  */
 package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
 
+import java.util.List;
+
 /**
  *
  * @author diego
  */
 public interface PlanRepository extends Repository<Plan>{
-    
+    public List<Plan> Search(Plan plan);
 }
