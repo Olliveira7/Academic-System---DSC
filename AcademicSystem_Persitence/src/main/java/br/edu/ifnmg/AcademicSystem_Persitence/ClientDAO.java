@@ -7,8 +7,10 @@ package br.edu.ifnmg.AcademicSystem_Persitence;
 
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ClientRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Contract;
 import java.util.HashMap;
 import java.util.List;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
 /**
@@ -59,4 +61,7 @@ public class ClientDAO extends DataAccessObject<Client> implements ClientReposit
         
         return sql.getResultList();
     }
+
+    
+    
 }

@@ -23,6 +23,7 @@ public class RepositoryFactory {
     private static Properties properties = new Properties();
     private static UserRepository user;
     private static ClientRepository client;
+    private static ContractRepository contract;
     private static SupplierRepository supplier;
     private static ProductRepository product;
     private static PlanRepository plan;
@@ -81,6 +82,14 @@ public class RepositoryFactory {
             client = (ClientRepository) getInstance(nameClass);
         }
         return client;
+    }
+    
+    public static ContractRepository getContractRepository(){
+        if(contract == null){
+            String nameClass = properties.getProperty("ContractRepository");
+            contract = (ContractRepository) getInstance(nameClass);
+        }
+        return contract;
     }
     
     public static SupplierRepository getSupplierRepository(){

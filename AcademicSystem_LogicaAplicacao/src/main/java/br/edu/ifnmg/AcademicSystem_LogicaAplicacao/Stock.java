@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -24,7 +25,7 @@ public class Stock implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @ManyToOne()
+    @OneToOne()
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
     

@@ -7,18 +7,18 @@ package br.edu.ifnmg.AcademicSystem_ConsolePresentation;
 
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ClientRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Contract;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ContractRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ItemSale;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Plan;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.PlanRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Product;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ProductRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Sale;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SaleRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Sex;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -173,7 +173,26 @@ public class Console {
 //            System.out.println();
 //        }
         
-        
+          ClientRepository repo = RepositoryFactory.getClientRepository();
+          PlanRepository repop = RepositoryFactory.getPlanRepository();
+          UserRepository repou = RepositoryFactory.getUserRepository();
+          ContractRepository repoc = RepositoryFactory.getContractRepository();
+          User user = new User();
+          Plan plan = new Plan();
+          Contract con = new Contract();
+          Client client = new Client();
+          
+          client = repo.Open(251L);
+          user = repou.Open(1L);
+          plan = repop.Open(701L);
+          
+          con.setClient(client);
+          con.setPlan(plan);
+          con.setUser(user);
+          repoc.Save(con);
+          
+
+
 //        ProductRepository repo = RepositoryFactory.getProductRepository();
 //        List<Product> pros = repo.OpenName("dia");
 //        for(Product product : pros){
