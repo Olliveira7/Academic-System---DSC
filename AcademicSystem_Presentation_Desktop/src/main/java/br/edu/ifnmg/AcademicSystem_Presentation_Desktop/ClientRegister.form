@@ -50,7 +50,7 @@
                       <Component id="txtNeighborhood" min="-2" pref="121" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="txtNumberHouse" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
@@ -259,12 +259,7 @@
         <Property name="text" type="java.lang.String" value="Number House:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="txtNumberHouse">
-      <Properties>
-        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-          <Format format="#####" subtype="-1" type="5"/>
-        </Property>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="txtNumberHouse">
     </Component>
   </SubComponents>
 </Form>

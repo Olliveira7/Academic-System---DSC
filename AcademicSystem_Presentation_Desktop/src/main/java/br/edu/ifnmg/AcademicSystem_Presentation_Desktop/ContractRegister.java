@@ -193,7 +193,29 @@ public class ContractRegister extends javax.swing.JInternalFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         
         if(!this.txtClientId.getText().isEmpty() && !this.txtPlanName.getText().isEmpty()){
+            List<Client> listClient = this.repositoryC.Search(null);
+            List<Plan> listPlan = this.repositoryP.Search(null);
+            int value = 0;
+            int valuee = 0;
             
+            for(Client client : listClient){
+                if(client.getId().equals(this.txtClientId.getText())){
+                    value = 1;
+                    this.client = client;
+                }
+            }
+            for(Plan plan : listPlan){
+                if(plan.getName().equals(this.txtPlanName.getText())){
+                    valuee = 1; 
+                    this.plan = plan;
+                }
+            }
+            
+            if(value == 1 && valuee == 1){
+                
+            }else{
+            
+            }
         }else{
             
         }

@@ -46,12 +46,13 @@ public class ItemPurchase implements Serializable {
         this.amount = 0;
     }
     
-    public ItemPurchase(Product product, int amount){
+    public ItemPurchase(Product product, int amount, Purchase purchase){
         this.product = product;
         this.amount = amount;
+        this.purchase = purchase;
         this.UnitValue = this.product.getPurchace_price();
     }
-
+    
     public Purchase getPurchase() {
         return purchase;
     }

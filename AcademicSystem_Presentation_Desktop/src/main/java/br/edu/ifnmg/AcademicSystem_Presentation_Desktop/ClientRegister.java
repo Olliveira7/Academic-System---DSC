@@ -33,7 +33,9 @@ public class ClientRegister extends javax.swing.JInternalFrame {
         client.setEmail(this.txtEmail.getText());
         client.setName(this.txtName.getText());
         client.setNeighborhood(this.txtNeighborhood.getText());
-        client.setNumberhouse(Integer.valueOf(this.txtNumberHouse.getText()));
+        if(!this.txtNumberHouse.getText().isEmpty()){
+            client.setNumberhouse(Integer.valueOf(this.txtNumberHouse.getText()));
+        }
         client.setStreet(this.txtStreet.getText());
         client.setTelephone(this.txttelefone1.getText());
         client.setSex(Sex.valueOf(this.cbbSex.getSelectedItem().toString()));
@@ -88,7 +90,7 @@ public class ClientRegister extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         txtNeighborhood = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtNumberHouse = new javax.swing.JFormattedTextField();
+        txtNumberHouse = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -138,12 +140,6 @@ public class ClientRegister extends javax.swing.JInternalFrame {
 
         jLabel9.setText("Number House:");
 
-        try {
-            txtNumberHouse.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -170,7 +166,7 @@ public class ClientRegister extends javax.swing.JInternalFrame {
                         .addComponent(txtNeighborhood, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNumberHouse))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -313,7 +309,7 @@ public class ClientRegister extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtNeighborhood;
-    private javax.swing.JFormattedTextField txtNumberHouse;
+    private javax.swing.JTextField txtNumberHouse;
     private javax.swing.JTextField txtStreet;
     private javax.swing.JTextField txttelefone1;
     // End of variables declaration//GEN-END:variables

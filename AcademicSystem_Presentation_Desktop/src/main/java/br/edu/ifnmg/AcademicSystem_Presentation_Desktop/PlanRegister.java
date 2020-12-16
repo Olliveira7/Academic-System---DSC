@@ -176,7 +176,7 @@ public class PlanRegister extends javax.swing.JInternalFrame {
                         this.setVisible(false);
                     }
                 }else{
-                    JOptionPane.showMessageDialog(this, "User is not saved!","Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Plan is not saved!","Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
                 JOptionPane.showMessageDialog(this, "Operation canceled!","Information", JOptionPane.INFORMATION_MESSAGE);

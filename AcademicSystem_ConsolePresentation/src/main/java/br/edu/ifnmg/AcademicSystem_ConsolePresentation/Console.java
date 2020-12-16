@@ -7,16 +7,15 @@ package br.edu.ifnmg.AcademicSystem_ConsolePresentation;
 
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ClientRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Contract;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ContractRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ItemSale;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Plan;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.PlanRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ItemPurchase;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Product;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ProductRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Purchase;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.PurchaseRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Sale;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SaleRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Supplier;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SupplierRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
 
@@ -83,10 +82,14 @@ public class Console {
 //        }else{
 //            System.out.println("Falhoooooooo");
 //        }
-
+//
 //          ProductRepository repo = RepositoryFactory.getProductRepository();
 //          Product p = new Product();
-//          p.setName("Banana");
+//          p.setName("Cachaça");
+//          p.setPurchasereason(40);
+//          p.setSalereason(21);
+//          p.setUnitpurchase(Unit.Box);
+//          p.setUnitsale(Unit.Unit);
 //          p.setPurchace_price(BigDecimal.valueOf(4.5d));
 //          p.setSale_price(BigDecimal.valueOf(20d));
 //          
@@ -109,41 +112,57 @@ public class Console {
 //          }
 //       
         
-        SaleRepository repoS = RepositoryFactory.getSaleRepository();
+//        SaleRepository repoS = RepositoryFactory.getSaleRepository();
         UserRepository repoU = RepositoryFactory.getUserRepository();
+        SupplierRepository repoSu = RepositoryFactory.getSupplierRepository();
         ClientRepository repoC = RepositoryFactory.getClientRepository();
         ProductRepository repoP = RepositoryFactory.getProductRepository();
+        PurchaseRepository repoPu = RepositoryFactory.getPurchaseRepository();
         
-        
-        
+        Purchase pu = new Purchase();
         Sale s = new Sale();
         User u = new User();
         Product p = new Product();
         Client c = new Client();
+        Supplier su = new Supplier();
         Product v = new Product();
         
         c = repoC.Open(251L);
+        su = repoSu.Open(1L);
         u = repoU.Open(1L);
-        p = repoP.Open(401L);
-        v = repoP.Open(451L);
+        p = repoP.Open(51L);
+        v = repoP.Open(101L);
         
-        ItemSale i = new ItemSale(p,5);
-        ItemSale e = new ItemSale(v,10);
-        i.setSale(s);
-        e.setSale(s);
-        s.setClient(c);
-        s.add(i);
-        s.add(e);
-        s.setUser(u);
+        ItemPurchase i = new ItemPurchase(p,5,pu);
+        ItemPurchase e = new ItemPurchase(v,5,pu);
         
-        repoS.Save(s);
+        pu.setSupplier(su);
+        pu.setUser(u);
+        pu.add(e);
+        pu.add(i);
+        repoPu.Save(pu);
+        v.setStock(5, 1);
+        p.setStock(5, 1);
+        repoP.Save(v);
+        repoP.Save(p);
+//        
+//        ItemSale i = new ItemSale(p,5);
+//        ItemSale e = new ItemSale(v,10);
+//        i.setSale(s);
+//        e.setSale(s);
+//        s.setClient(c);
+//        s.add(i);
+//        s.add(e);
+//        s.setUser(u);
+        //
+       // repoS.Save(s);
 //        System.out.println("oiiiiiiii");
 //        User u = new User();
 //        System.out.println("oiiiiiiii");
 //        UserRepository repo = RepositoryFactory.getUserRepository();
 //        u.setCpf("1112");
-//        u.setName("def");
-//        u.setLogin("def");
+//        u.setName("adm");
+//        u.setLogin("adm");
 //        u.setPassword("123");
 //        u.setEmail("kkkkkkk@gmail.com");
 //        u.setStatus(1);
@@ -173,23 +192,39 @@ public class Console {
 //            System.out.println();
 //        }
         
-          ClientRepository repo = RepositoryFactory.getClientRepository();
-          PlanRepository repop = RepositoryFactory.getPlanRepository();
-          UserRepository repou = RepositoryFactory.getUserRepository();
-          ContractRepository repoc = RepositoryFactory.getContractRepository();
-          User user = new User();
-          Plan plan = new Plan();
-          Contract con = new Contract();
-          Client client = new Client();
+//         SupplierRepository repo = RepositoryFactory.getSupplierRepository();
+//         Supplier s = new Supplier();
+//
+//         s.setCnpj("5154484");
+//         s.setName("Carcas");
+//         repo.Save(s);
+//          ContractRepository repoc = RepositoryFactory.getContractRepository();
+//          ClientRepository repo = RepositoryFactory.getClientRepository();
+//          PlanRepository repop = RepositoryFactory.getPlanRepository();
+//          
+//          Plan p = repop.Open();
+//          
+//          if(repoc.SearchClientPlan(251L, 71L) == true){
+//              System.out.println("Susesso");
+//          }
           
-          client = repo.Open(251L);
-          user = repou.Open(1L);
-          plan = repop.Open(701L);
-          
-          con.setClient(client);
-          con.setPlan(plan);
-          con.setUser(user);
-          repoc.Save(con);
+//          ClientRepository repo = RepositoryFactory.getClientRepository();
+//          PlanRepository repop = RepositoryFactory.getPlanRepository();
+//          UserRepository repou = RepositoryFactory.getUserRepository();
+//          ContractRepository repoc = RepositoryFactory.getContractRepository();
+//          User user = new User();
+//          Plan plan = new Plan();
+//          Contract con = new Contract();
+//          Client client = new Client();
+//          
+//          client = repo.Open(251L);
+//          user = repou.Open(1L);
+//          plan = repop.Open(701L);
+//          
+//          con.setClient(client);
+//          con.setPlan(plan);
+//          con.setUser(user);
+//          repoc.Save(con);
           
 
 

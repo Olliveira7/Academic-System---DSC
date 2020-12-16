@@ -10,9 +10,12 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
@@ -22,6 +25,7 @@ import javax.persistence.Version;
  */
 @Entity
 @Table(name = "products")
+@SecondaryTable(name = "stock")
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -34,6 +38,14 @@ public class Product implements Serializable {
     
     private int status;
     
+    //são somente nomeclaturas
+    @Enumerated(EnumType.STRING)
+    private Unit unitsale;
+    
+    //são somente nomeclaturas
+    @Enumerated(EnumType.STRING)
+    private Unit unitpurchase;
+    
     @Column(precision = 8, scale = 2)
     private BigDecimal sale_price;
     
@@ -43,12 +55,24 @@ public class Product implements Serializable {
     @Column(length = 500)
     private String description;
     
+    private int purchasereason;
+    
+    private int salereason;
+    
+    @Column(nullable = false, table= "stock")
+    private int stock;
+    
     @Version
     private int version;
     
     public Product(){
         this.id = 0L;
         this.name = "";
+        this.purchasereason = 0;
+        this.salereason = 0;
+        this.stock = 0;
+        this.unitpurchase = Unit.Box;
+        this.unitsale = Unit.Unit;
         this.description = "";
         this.purchace_price = new BigDecimal("0.00");
         this.sale_price = new BigDecimal("0.00");
@@ -56,6 +80,53 @@ public class Product implements Serializable {
         this.version = 1;
     }
 
+    public Unit getUnitsale() {
+        return unitsale;
+    }
+
+    public void setUnitsale(Unit unitsale) {
+        this.unitsale = unitsale;
+    }
+
+    public Unit getUnitpurchase() {
+        return unitpurchase;
+    }
+
+    public void setUnitpurchase(Unit unitpurchase) {
+        this.unitpurchase = unitpurchase;
+    }
+
+    public int getPurchasereason() {
+        return purchasereason;
+    }
+
+    public void setPurchasereason(int purchasereason) {
+        this.purchasereason = purchasereason;
+    }
+
+    public int getSalereason() {
+        return salereason;
+    }
+
+    public void setSalereason(int salereason) {
+        this.salereason = salereason;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock, int type) {
+        if(type == 1){
+            this.stock = (stock * this.purchasereason) + this.stock;
+        }
+        if(type == 2){
+            if((stock * this.salereason) < stock){
+                this.stock = this.stock - (stock * this.salereason);
+            }
+        }
+    }
+    
     public int getVersion() {
         return version;
     }
@@ -115,12 +186,18 @@ public class Product implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.id);
-        hash = 67 * hash + Objects.hashCode(this.name);
-        hash = 67 * hash + this.status;
-        hash = 67 * hash + Objects.hashCode(this.sale_price);
-        hash = 67 * hash + Objects.hashCode(this.purchace_price);
-        hash = 67 * hash + Objects.hashCode(this.description);
+        hash = 83 * hash + Objects.hashCode(this.id);
+        hash = 83 * hash + Objects.hashCode(this.name);
+        hash = 83 * hash + this.status;
+        hash = 83 * hash + Objects.hashCode(this.unitsale);
+        hash = 83 * hash + Objects.hashCode(this.unitpurchase);
+        hash = 83 * hash + Objects.hashCode(this.sale_price);
+        hash = 83 * hash + Objects.hashCode(this.purchace_price);
+        hash = 83 * hash + Objects.hashCode(this.description);
+        hash = 83 * hash + this.purchasereason;
+        hash = 83 * hash + this.salereason;
+        hash = 83 * hash + this.stock;
+        hash = 83 * hash + this.version;
         return hash;
     }
 
@@ -139,6 +216,18 @@ public class Product implements Serializable {
         if (this.status != other.status) {
             return false;
         }
+        if (this.purchasereason != other.purchasereason) {
+            return false;
+        }
+        if (this.salereason != other.salereason) {
+            return false;
+        }
+        if (this.stock != other.stock) {
+            return false;
+        }
+        if (this.version != other.version) {
+            return false;
+        }
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
@@ -146,6 +235,12 @@ public class Product implements Serializable {
             return false;
         }
         if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (this.unitsale != other.unitsale) {
+            return false;
+        }
+        if (this.unitpurchase != other.unitpurchase) {
             return false;
         }
         if (!Objects.equals(this.sale_price, other.sale_price)) {
@@ -156,6 +251,8 @@ public class Product implements Serializable {
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {
