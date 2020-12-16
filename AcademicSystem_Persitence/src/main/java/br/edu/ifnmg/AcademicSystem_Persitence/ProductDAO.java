@@ -32,5 +32,16 @@ public class ProductDAO extends DataAccessObject<Product> implements ProductRepo
             query.setParameter("parameter", name);
         return query.getResultList();
     }
+
+    @Override
+    public Product ProductName(String name) {
+        String jpql = "select pd from Product pd where pd.name =:parameter";
+        Query query = this.manager.createQuery(jpql);
+        query.setParameter("parameter", name);
+        if(query.getResultList().size() > 0){
+            return (Product) query.getSingleResult();
+        }
+        return null;
+    }
     
 }

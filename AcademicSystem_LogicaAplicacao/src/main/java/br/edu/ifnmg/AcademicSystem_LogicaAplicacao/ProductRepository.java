@@ -13,4 +13,5 @@ import java.util.List;
  */
 public interface ProductRepository extends Repository<Product>{
     public List<Product> OpenName(String name);
+    public Product ProductName(String name);
 }

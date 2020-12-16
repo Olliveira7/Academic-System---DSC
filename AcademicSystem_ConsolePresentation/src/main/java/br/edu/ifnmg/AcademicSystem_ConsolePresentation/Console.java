@@ -113,38 +113,48 @@ public class Console {
 //       
         
 //        SaleRepository repoS = RepositoryFactory.getSaleRepository();
-        UserRepository repoU = RepositoryFactory.getUserRepository();
-        SupplierRepository repoSu = RepositoryFactory.getSupplierRepository();
-        ClientRepository repoC = RepositoryFactory.getClientRepository();
+//        UserRepository repoU = RepositoryFactory.getUserRepository();
+//        SupplierRepository repoSu = RepositoryFactory.getSupplierRepository();
+//        ClientRepository repoC = RepositoryFactory.getClientRepository();
         ProductRepository repoP = RepositoryFactory.getProductRepository();
-        PurchaseRepository repoPu = RepositoryFactory.getPurchaseRepository();
         
-        Purchase pu = new Purchase();
-        Sale s = new Sale();
-        User u = new User();
-        Product p = new Product();
-        Client c = new Client();
-        Supplier su = new Supplier();
-        Product v = new Product();
+        Product product = repoP.ProductName("Banana");
+        if(product != null){
+            System.out.println("OK " + product.getId().toString());
         
-        c = repoC.Open(251L);
-        su = repoSu.Open(1L);
-        u = repoU.Open(1L);
-        p = repoP.Open(51L);
-        v = repoP.Open(101L);
+        }else{
+            System.out.println("NO");
+        }
         
-        ItemPurchase i = new ItemPurchase(p,5,pu);
-        ItemPurchase e = new ItemPurchase(v,5,pu);
-        
-        pu.setSupplier(su);
-        pu.setUser(u);
-        pu.add(e);
-        pu.add(i);
-        repoPu.Save(pu);
-        v.setStock(5, 1);
-        p.setStock(5, 1);
-        repoP.Save(v);
-        repoP.Save(p);
+//        PurchaseRepository repoPu = RepositoryFactory.getPurchaseRepository();
+//        
+//        Purchase pu = new Purchase();
+//        Sale s = new Sale();
+//        User u = new User();
+//        Product p = new Product();
+//        Client c = new Client();
+//        Supplier su = new Supplier();
+//        Product v = new Product();
+//        
+//        c = repoC.Open(251L);
+//        su = repoSu.Open(1L);
+//        u = repoU.Open(1L);
+//        p = repoP.Open(51L);
+//        v = repoP.Open(101L);
+//        
+//        ItemPurchase i = new ItemPurchase(p,5,pu);
+//        ItemPurchase e = new ItemPurchase(v,5,pu);
+//        
+//        pu.setSupplier(su);
+//        pu.setUser(u);
+//        pu.add(e);
+//        pu.add(i);
+//        repoPu.Save(pu);
+//        v.setStock(5, 1);
+//        p.setStock(5, 1);
+//        repoP.Save(v);
+//        repoP.Save(p);
+
 //        
 //        ItemSale i = new ItemSale(p,5);
 //        ItemSale e = new ItemSale(v,10);

@@ -68,6 +68,18 @@ public class ProductRegister extends javax.swing.JInternalFrame {
         }
         
     }
+    
+    public void setNull(){
+        this.txtDescription.setText("");
+        this.txtName.setText("");
+        this.txtPurchaseReason.setText("");
+        this.txtSaleReason.setText("");
+        this.txtPurchasePrice.setText("");
+        this.txtSalePrice.setText("");
+        this.cbbPurchaseUnit.setSelectedIndex(0);
+        this.cbbSaleUnit.setSelectedIndex(0);
+        this.cbbStatus.setSelectedIndex(0);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -88,7 +100,6 @@ public class ProductRegister extends javax.swing.JInternalFrame {
         cbbStatus = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         btnSale = new javax.swing.JButton();
-        btnCancel = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         txtPurchasePrice = new javax.swing.JFormattedTextField();
         txtSalePrice = new javax.swing.JFormattedTextField();
@@ -128,8 +139,6 @@ public class ProductRegister extends javax.swing.JInternalFrame {
             }
         });
 
-        btnCancel.setText("Cancel");
-
         jLabel8.setText("Purchase Reason:");
 
         txtPurchasePrice.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,##0.00"))));
@@ -161,10 +170,6 @@ public class ProductRegister extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtDescription))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSale)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCancel))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -200,9 +205,12 @@ public class ProductRegister extends javax.swing.JInternalFrame {
                                     .addComponent(txtSaleReason)
                                     .addComponent(cbbSaleUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbbPurchaseUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnSale)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbbPurchaseUnit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -241,9 +249,7 @@ public class ProductRegister extends javax.swing.JInternalFrame {
                     .addComponent(cbbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSale)
-                    .addComponent(btnCancel))
+                .addComponent(btnSale)
                 .addContainerGap())
         );
 
@@ -256,20 +262,25 @@ public class ProductRegister extends javax.swing.JInternalFrame {
                 this.getComponent();
                 if(repository.Save(product)){
                     JOptionPane.showMessageDialog(null, "The product is saved!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    if(JOptionPane.showConfirmDialog(this, "Do you want to crate another client?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                        this.product = new Product();
+                        this.setNull();
+                    }else{
+                        this.setVisible(true);
+                    }
                 }else{
                    JOptionPane.showMessageDialog(this, "Product is not saved!","Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }else{
-                
+                JOptionPane.showMessageDialog(this, "Operation canceled!","Information", JOptionPane.INFORMATION_MESSAGE);
             }
         }else{
-        
+            JOptionPane.showMessageDialog(null, "The Name, Purchase Price, Sale Price, Purchase Reason and Sale Reason must be completed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSale;
     private javax.swing.JComboBox<String> cbbPurchaseUnit;
     private javax.swing.JComboBox<String> cbbSaleUnit;
