@@ -31,7 +31,7 @@ public class Supplier implements Serializable {
     @Column(length =  250, nullable = true)
     private String name;
     
-    @Column(length =  50, nullable = true)
+    @Column(length =  50, nullable = true, unique = true)
     private String cnpj;
     
     @Column(length =  250, nullable = true)
@@ -58,7 +58,7 @@ public class Supplier implements Serializable {
     public Supplier(){
         this.cnpj = "";
         this.email = "";
-        this.id = 1L;
+        this.id = 0L;
         this.name = "";
         this.neighborhood = "";
         this.numberhouse = 0;

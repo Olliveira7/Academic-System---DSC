@@ -326,7 +326,7 @@ public class ProductEdit extends javax.swing.JInternalFrame {
                 this.getComponent();
                 if(repository.Save(product)){
                     JOptionPane.showMessageDialog(null, "The product is saved!", "Information", JOptionPane.INFORMATION_MESSAGE);
-                    if(JOptionPane.showConfirmDialog(this, "Do you want to edit another client?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                    if(JOptionPane.showConfirmDialog(this, "Do you want to edit another sale?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
                         ProductSelect screen = new ProductSelect();
                         this.getParent().add(screen);
                         screen.setVisible(true);
