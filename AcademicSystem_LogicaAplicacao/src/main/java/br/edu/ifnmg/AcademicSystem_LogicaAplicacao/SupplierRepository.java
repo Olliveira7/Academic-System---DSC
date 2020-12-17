@@ -5,10 +5,12 @@
  */
 package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
 
+import java.util.List;
+
 /**
  *
  * @author diego
  */
 public interface SupplierRepository extends Repository<Supplier>{
-    
+    public List<Supplier> Search(Supplier supplier);
 }
