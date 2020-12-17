@@ -14,6 +14,7 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Supplier;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SupplierRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -52,10 +53,6 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
     
     public void setTable(){
         
-        //Aqui eu alimento uma lista com o método pesquisa que retorna uma lista
-        //List<Client> result = repository.Search(client);
-        
-        //Crio um atributo do tipo que recebe colunas e linhas 
         DefaultTableModel model = new DefaultTableModel();
         
         //Alimento com os nomes das colunas 
@@ -71,6 +68,42 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         }
         //Aqui eu preencho na tabela 
         tblItem.setModel(model);
+    }
+    
+    public void setTableNull(){
+        
+        //Aqui eu alimento uma lista com o método pesquisa que retorna uma lista
+        //List<Client> result = repository.Search(client);
+        
+        //Crio um atributo do tipo que recebe colunas e linhas 
+        DefaultTableModel model = new DefaultTableModel();
+        
+        //Alimento com os nomes das colunas 
+        model.addColumn("Product Name");
+        model.addColumn("Amount");
+        
+        //Aqui eu alimento as linhas com os dados da lista
+        
+        Vector linha = new Vector();
+        linha.add("");
+        linha.add("");
+        model.addRow(linha);
+        
+        //Aqui eu preencho na tabela 
+        tblItem.setModel(model);
+    }
+    
+    public void updateValeu(int type){
+        BigDecimal value = new BigDecimal("0.0");
+        BigDecimal all = new BigDecimal("0.0");
+        for(ItemPurchase i : listItem){
+            value = i.getUnitValue().multiply(new BigDecimal(i.getAmount()));
+            all.add(value);
+            System.out.println(String.valueOf(value));
+            this.lblValue.setText(String.valueOf(all));
+        }
+        this.lblValue.setText(String.valueOf(all));
+        System.out.println(String.valueOf(all));
     }
     
     /**
@@ -96,6 +129,8 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         btnSave = new javax.swing.JButton();
         txtSupplierId = new javax.swing.JFormattedTextField();
         txtAmount = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        lblValue = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -130,6 +165,11 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         });
 
         btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
 
         tblItem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -175,6 +215,10 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel5.setText("Value all:");
+
+        lblValue.setText("0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -200,7 +244,6 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
                                         .addComponent(btnAdd)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnRemove))
-                            .addComponent(btnSave)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel1)
@@ -210,7 +253,14 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
                                     .addComponent(jLabel2)
                                     .addGap(13, 13, 13)
                                     .addComponent(txtDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 428, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 2, Short.MAX_VALUE)))
+                        .addGap(0, 2, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblValue)
+                        .addGap(32, 32, 32)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -237,8 +287,11 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(btnSave)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(jLabel5)
+                    .addComponent(lblValue))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -262,6 +315,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
                     this.setTable();
                     this.txtAmount.setText("");
                     this.txtProductName.setText("");
+                    
                 }else{
                 
                 }
@@ -271,6 +325,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         }else{
         
         }
+        this.updateValeu(1);
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -290,25 +345,49 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
                             Product product = item.getProduct();
                             product.setStock(item.getAmount(), 1);
                             this.repositoryProduct.Save(product);
+                            this.txtProductName.setText("");
+                            this.txtSupplierId.setText("");
+                            this.txtDescription.setText("");
+                            this.txtAmount.setText("");
+                            this.lblValue.setText("0");
+                            this.setTableNull();
                         }
                         JOptionPane.showMessageDialog(null, "The purchase is saved!", "Information", JOptionPane.INFORMATION_MESSAGE);
                     }else{
-                    
+                        JOptionPane.showMessageDialog(this, "Purchase is not saved!","Erro", JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
-                
+                    JOptionPane.showMessageDialog(this, "Operation canceled!","Information", JOptionPane.INFORMATION_MESSAGE);
                 }
             }else{
-            
+                JOptionPane.showMessageDialog(this, "Supplier is not exist!","Information", JOptionPane.INFORMATION_MESSAGE);
             }
         }else{
-        
+            JOptionPane.showMessageDialog(null, "The Supplier Id and Items of purchase must be completed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAmountActionPerformed
+
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        if(!this.txtProductName.getText().isEmpty()){
+            System.out.println("ggggg");
+            for(ItemPurchase item : listItem){
+                System.out.println(item.getProduct().getName());
+                if(txtProductName.getText().equals(item.getProduct().getName())){
+                    System.out.println("ggggk");
+                    this.listItem.remove(item);
+                    this.setTable();
+                }
+            }
+            
+            for(ItemPurchase item : listItem){
+                System.out.println(item.getProduct().getName());
+            }
+        }
+    }//GEN-LAST:event_btnRemoveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -319,8 +398,10 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblValue;
     private javax.swing.JTable tblItem;
     private javax.swing.JTextField txtAmount;
     private javax.swing.JTextField txtDescription;

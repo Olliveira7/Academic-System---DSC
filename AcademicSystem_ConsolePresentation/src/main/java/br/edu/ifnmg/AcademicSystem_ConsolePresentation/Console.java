@@ -116,16 +116,16 @@ public class Console {
 //        UserRepository repoU = RepositoryFactory.getUserRepository();
 //        SupplierRepository repoSu = RepositoryFactory.getSupplierRepository();
 //        ClientRepository repoC = RepositoryFactory.getClientRepository();
-        ProductRepository repoP = RepositoryFactory.getProductRepository();
-        
-        Product product = repoP.ProductName("Banana");
-        if(product != null){
-            System.out.println("OK " + product.getId().toString());
-        
-        }else{
-            System.out.println("NO");
-        }
-        
+//        ProductRepository repoP = RepositoryFactory.getProductRepository();
+//        
+//        Product product = repoP.ProductName("Banana");
+//        if(product != null){
+//            System.out.println("OK " + product.getId().toString());
+//        
+//        }else{
+//            System.out.println("NO");
+//        }
+//        
 //        PurchaseRepository repoPu = RepositoryFactory.getPurchaseRepository();
 //        
 //        Purchase pu = new Purchase();

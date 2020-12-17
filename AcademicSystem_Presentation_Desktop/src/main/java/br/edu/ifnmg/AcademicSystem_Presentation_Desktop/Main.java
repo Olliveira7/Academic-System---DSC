@@ -5,6 +5,8 @@
  */
 package br.edu.ifnmg.AcademicSystem_Presentation_Desktop;
 
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Product;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ProductRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
@@ -140,6 +142,11 @@ public class Main extends javax.swing.JFrame {
         jMenu5.add(jMenuItem4);
 
         jMenuItem5.setText("Edit");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu5.add(jMenuItem5);
 
         jMenuItem6.setText("Search");
@@ -290,6 +297,12 @@ public class Main extends javax.swing.JFrame {
         screen.setVisible(true);
         screen.setUser(user);
     }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        ProductSelect screen = new ProductSelect();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
