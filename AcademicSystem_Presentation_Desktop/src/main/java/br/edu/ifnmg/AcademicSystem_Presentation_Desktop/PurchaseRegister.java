@@ -58,12 +58,14 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         //Alimento com os nomes das colunas 
         model.addColumn("Product Name");
         model.addColumn("Amount");
+        model.addColumn("Value Unit");
         
         //Aqui eu alimento as linhas com os dados da lista
         for(ItemPurchase i : this.listItem){
             Vector linha = new Vector();
             linha.add(i.getProduct().getName());
             linha.add(i.getAmount());
+            linha.add(i.getUnitValue());
             model.addRow(linha);
         }
         //Aqui eu preencho na tabela 
@@ -81,10 +83,12 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         //Alimento com os nomes das colunas 
         model.addColumn("Product Name");
         model.addColumn("Amount");
+        model.addColumn("Value Unit");
         
         //Aqui eu alimento as linhas com os dados da lista
         
         Vector linha = new Vector();
+        linha.add("");
         linha.add("");
         linha.add("");
         model.addRow(linha);
@@ -176,14 +180,14 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Product Name", "Amount"
+                "Product Name", "Amount", "Value Unit"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.Long.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -198,6 +202,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         if (tblItem.getColumnModel().getColumnCount() > 0) {
             tblItem.getColumnModel().getColumn(0).setResizable(false);
             tblItem.getColumnModel().getColumn(1).setResizable(false);
+            tblItem.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btnSave.setText("Save");
@@ -351,6 +356,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
                             this.txtAmount.setText("");
                             this.lblValue.setText("0");
                             this.setTableNull();
+                            this.listItem = new ArrayList<>();
                         }
                         JOptionPane.showMessageDialog(null, "The purchase is saved!", "Information", JOptionPane.INFORMATION_MESSAGE);
                     }else{

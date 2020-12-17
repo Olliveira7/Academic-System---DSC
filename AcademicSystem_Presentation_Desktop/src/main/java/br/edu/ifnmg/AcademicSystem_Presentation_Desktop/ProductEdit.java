@@ -45,9 +45,10 @@ public class ProductEdit extends javax.swing.JInternalFrame {
         this.lblID.setText(product.getId().toString());
         this.txtDescription.setText(product.getDescription());
         this.txtName.setText(product.getName());
-        this.txtPurchasePrice.setText(product.getPurchace_price().toString());
+        
+        this.txtPurchasePrice.setText((product.getPurchace_price().toString()).replace(".", ","));
         this.txtPurchaseReason.setText(String.valueOf(product.getPurchasereason()));
-        this.txtSalePrice.setText(product.getSale_price().toString());
+        this.txtSalePrice.setText((product.getSale_price().toString()).replace(".", ","));
         this.txtSaleReason.setText(String.valueOf(product.getSalereason()));
         //Box, Unit, Bale, Outher
         if(product.getUnitpurchase() == Unit.Box){

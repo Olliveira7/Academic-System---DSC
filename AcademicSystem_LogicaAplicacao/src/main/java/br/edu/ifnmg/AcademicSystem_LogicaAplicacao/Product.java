@@ -121,7 +121,7 @@ public class Product implements Serializable {
             this.stock = (stock * this.purchasereason) + this.stock;
         }
         if(type == 2){
-            if((stock * this.salereason) < stock){
+            if((stock * this.salereason) <= this.stock){
                 this.stock = this.stock - (stock * this.salereason);
             }
         }

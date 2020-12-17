@@ -46,9 +46,10 @@ public class ItemSale implements Serializable {
         this.amount = 0;
     }
     
-    public ItemSale(Product product, int amount){
+    public ItemSale(Product product, int amount, Sale sale){
         this.product = product;
         this.amount = amount;
+        this.sale = sale;
         this.UnitValue = this.product.getSale_price();
     }
 
