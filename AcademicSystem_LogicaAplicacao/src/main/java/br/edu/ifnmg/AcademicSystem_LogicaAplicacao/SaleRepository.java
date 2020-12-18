@@ -5,10 +5,12 @@
  */
 package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
 
+import java.util.List;
+
 /**
  *
  * @author diego
  */
 public interface SaleRepository extends Repository<Sale>{
-    
+    public List<Sale> SearchAll();
 }

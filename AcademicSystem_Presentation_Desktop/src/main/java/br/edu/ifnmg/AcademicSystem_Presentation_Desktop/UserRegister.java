@@ -54,7 +54,12 @@ public class UserRegister extends javax.swing.JInternalFrame {
         user.setLogin(this.txtLogin.getText());
         user.setName(this.txtName.getText());
         user.setNeighborhood(this.txtNeighborhood.getText());
-        user.setNumberhouse(Integer.valueOf(this.txtNumberHouser1.getText()));
+        if(!this.txtNumberHouser1.getText().isEmpty()){
+            user.setNumberhouse(Integer.valueOf(this.txtNumberHouser1.getText()));
+        }else{
+            user.setNumberhouse(0);
+        }
+        
         user.setPassword(String.valueOf(this.txtPassword.getPassword()));
         user.setStreet(this.txtStreet.getText());
         user.setTelephone(this.txtTelephone.getText());

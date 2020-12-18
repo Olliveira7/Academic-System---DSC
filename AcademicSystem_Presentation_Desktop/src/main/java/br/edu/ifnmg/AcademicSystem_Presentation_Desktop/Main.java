@@ -69,6 +69,7 @@ public class Main extends javax.swing.JFrame {
         jMenuItem13 = new javax.swing.JMenuItem();
         jMenu7 = new javax.swing.JMenu();
         jMenuItem14 = new javax.swing.JMenuItem();
+        jMenuItem19 = new javax.swing.JMenuItem();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
 
@@ -234,6 +235,14 @@ public class Main extends javax.swing.JFrame {
         });
         jMenu7.add(jMenuItem14);
 
+        jMenuItem19.setText("Search");
+        jMenuItem19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem19ActionPerformed(evt);
+            }
+        });
+        jMenu7.add(jMenuItem19);
+
         jMenuBar1.add(jMenu7);
 
         jMenu8.setText("Sale");
@@ -371,6 +380,12 @@ public class Main extends javax.swing.JFrame {
         screen.setVisible(true);
     }//GEN-LAST:event_jMenuItem17ActionPerformed
 
+    private void jMenuItem19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem19ActionPerformed
+        PurchaseSaleSearch screen = new PurchaseSaleSearch();
+        this.add(screen);
+        screen.setVisible(true);
+    }//GEN-LAST:event_jMenuItem19ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -426,6 +441,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
+    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;

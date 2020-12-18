@@ -97,7 +97,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         tblItem.setModel(model);
     }
     
-    public void updateValeu(int type){
+    public void updateValeu(){
         this.lblValue.setText(this.purchase.getTotalvalue().toString());
     }
     
@@ -311,15 +311,15 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
                     this.setTable();
                     this.txtAmount.setText("");
                     this.txtProductName.setText("");
-                    this.updateValeu(1);
+                    this.updateValeu();
                 }else{
-                
+                    JOptionPane.showMessageDialog(null, "The quantity exceeds the quantity present in the stock!", "Information", JOptionPane.INFORMATION_MESSAGE);
                 }
             } catch(Exception ex){
-            
+                JOptionPane.showMessageDialog(this, "Product is not exist!","Error", JOptionPane.ERROR_MESSAGE);
             }
         }else{
-        
+            JOptionPane.showMessageDialog(null, "The Amount and Product Name of purchase must be completed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_btnAddActionPerformed
@@ -330,16 +330,13 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
             if(supplier != null){
                 if(JOptionPane.showConfirmDialog(this, "Really want to save?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
                     this.supplier = supplier;
-//                    for(ItemPurchase item : this.listItem){
-//                        this.purchase.add(item);
-//                    }
                     this.purchase.setSupplier(this.supplier);
                     this.purchase.setUser(this.user);
                     this.purchase.setDescription(this.txtDescription.getText());
                     if(this.repositoryPurchase.Save(this.purchase)){
                         for(ItemPurchase item : this.purchase.getItems()){
                             Product product = item.getProduct();
-                            product.setStock(item.getAmount(), 1);
+                            product.setStock(item.getAmount (), 1);
                             this.repositoryProduct.Save(product);
                         }
                         this.txtProductName.setText("");
@@ -371,19 +368,15 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
 
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         if(!this.txtProductName.getText().isEmpty()){
-            System.out.println("ggggg");
             for(ItemPurchase item : this.purchase.getItems()){
                 System.out.println(item.getProduct().getName());
                 if(txtProductName.getText().equals(item.getProduct().getName())){
-                    System.out.println("ggggk");
                     this.purchase.remove(item);
                     this.setTable();
+                    this.updateValeu();
                 }
             }
             
-            for(ItemPurchase item : this.purchase.getItems()){
-                System.out.println(item.getProduct().getName());
-            }
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 

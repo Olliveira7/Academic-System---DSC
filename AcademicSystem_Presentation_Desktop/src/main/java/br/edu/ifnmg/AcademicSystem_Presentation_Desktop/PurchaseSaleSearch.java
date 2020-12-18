@@ -16,8 +16,11 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SaleRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Supplier;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SupplierRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,6 +33,7 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
     ProductRepository repositoryProduct = RepositoryFactory.getProductRepository();
     ClientRepository repositoryClient = RepositoryFactory.getClientRepository();
     SaleRepository repositorySale = RepositoryFactory.getSaleRepository();
+    UserRepository repositoryUser = RepositoryFactory.getUserRepository();
     
     private Supplier supplier;
     private User user;
@@ -50,8 +54,93 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
         initComponents();
     }
 
-    public void setPurchase(List<Purchase> purchase){
+    public void setSale(List<Sale> list){
         
+        
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn("Type");
+        model.addColumn("Date");
+        model.addColumn("User");
+        model.addColumn("Client");
+        model.addColumn("Supplier");
+        model.addColumn("Value");
+        
+        for(Sale item : list){
+            Vector line = new Vector();
+            line.add("Sale");
+            line.add(item.getDatetime().toString());
+            line.add(item.getUser().getName());
+            line.add(item.getClient().getName());
+            line.add("");
+            line.add(item.getTotalvalue());
+            
+            model.addRow(line);
+        }
+        this.tblTransaction.setModel(model);
+    }
+    
+    public void setPurchase(List<Purchase> list){
+        
+        
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn("Type");
+        model.addColumn("Date");
+        model.addColumn("User");
+        model.addColumn("Client");
+        model.addColumn("Supplier");
+        model.addColumn("Value");
+        
+        for(Purchase item : list){
+            Vector line = new Vector();
+            line.add("Purchase");
+            line.add(item.getDatetime().toString());
+            line.add(item.getUser().getName());
+            line.add("");
+            line.add(item.getSupplier().getName());
+            line.add(item.getTotalvalue());
+            
+            model.addRow(line);
+        }
+        this.tblTransaction.setModel(model);
+    }
+    
+    public void setAll(List<Purchase> list, List<Sale> lists){
+        
+        
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn("Type");
+        model.addColumn("Date");
+        model.addColumn("User");
+        model.addColumn("Client");
+        model.addColumn("Supplier");
+        model.addColumn("Value");
+        
+        for(Purchase item : list){
+            Vector line = new Vector();
+            line.add("Purchase");
+            line.add(item.getDatetime().toString());
+            line.add(item.getUser().getName());
+            line.add("");
+            line.add(item.getSupplier().getName());
+            line.add(item.getTotalvalue());
+            
+            model.addRow(line);
+        }
+        for(Sale item : lists){
+            Vector line = new Vector();
+            line.add("Sale");
+            line.add(item.getDatetime().toString());
+            line.add(item.getUser().getName());
+            line.add(item.getClient().getName());
+            line.add("");
+            line.add(item.getTotalvalue());
+            
+            model.addRow(line);
+        }
+        this.tblTransaction.setModel(model);
     }
     
     /**
@@ -68,7 +157,7 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
         btnPurchase = new javax.swing.JButton();
         btnSale = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTransaction = new javax.swing.JTable();
         btnAll = new javax.swing.JButton();
 
         setClosable(true);
@@ -86,13 +175,18 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
         });
 
         btnSale.setText("Sale");
+        btnSale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaleActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTransaction.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tipo", "Data", "User", "Client", "Supplier", "Value"
+                "Type", "Date", "User", "Client", "Supplier", "Value"
             }
         ) {
             Class[] types = new Class [] {
@@ -110,17 +204,22 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        jScrollPane1.setViewportView(tblTransaction);
+        if (tblTransaction.getColumnModel().getColumnCount() > 0) {
+            tblTransaction.getColumnModel().getColumn(0).setResizable(false);
+            tblTransaction.getColumnModel().getColumn(1).setResizable(false);
+            tblTransaction.getColumnModel().getColumn(2).setResizable(false);
+            tblTransaction.getColumnModel().getColumn(3).setResizable(false);
+            tblTransaction.getColumnModel().getColumn(4).setResizable(false);
+            tblTransaction.getColumnModel().getColumn(5).setResizable(false);
         }
 
         btnAll.setText("All");
+        btnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAllActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -166,26 +265,106 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPurchaseActionPerformed
-        if(!this.txtUser.getText().isEmpty()){
+
             List<Purchase> list = repositoryPurchase.SearchAll();
             List<Purchase> listP = new ArrayList<>();
             int value = 0;
-            for(Purchase purchase : list){
-                if(purchase.getUser().getId().equals(Long.valueOf(this.txtUser.getText()))){
-                    value = 1;
-                    listP.add(purchase);
+            
+            if(!this.txtUser.getText().isEmpty()){
+                User user = this.repositoryUser.Open(Long.valueOf(this.txtUser.getText()));
+                if(user != null){
+                    for(Purchase purchase : list){
+                        if(purchase.getUser().getId().equals(Long.valueOf(this.txtUser.getText()))){
+                            value = 1;
+                            listP.add(purchase);
+                            System.out.println(purchase.getUser().getId());
+                        }
+                    }
                 }
             }
             
             if(value == 1){
+                this.setPurchase(listP);
                 
             }else{
+                this.setPurchase(list);
             
             }
-        }else{
-        
-        }
     }//GEN-LAST:event_btnPurchaseActionPerformed
+
+    private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
+
+            List<Sale> list = repositorySale.SearchAll();
+            List<Sale> listP = new ArrayList<>();
+            int value = 0;
+            
+            if(!this.txtUser.getText().isEmpty()){
+                User user = this.repositoryUser.Open(Long.valueOf(this.txtUser.getText()));
+                if(user != null){
+                    for(Sale sale : list){
+                        if(sale.getUser().getId().equals(Long.valueOf(this.txtUser.getText()))){
+                            value = 1;
+                            listP.add(sale);
+                            System.out.println(sale.getUser().getId());
+                        }
+                    }
+                }
+            }
+            
+            if(value == 1){
+                this.setSale(listP);
+                
+            }else{
+                this.setSale(list);
+            
+           }
+    }//GEN-LAST:event_btnSaleActionPerformed
+
+    private void btnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllActionPerformed
+        
+        
+        List<Purchase> list = repositoryPurchase.SearchAll();
+        List<Sale> lists = repositorySale.SearchAll();
+            List<Purchase> listP = new ArrayList<>();
+            List<Sale> listS = new ArrayList<>();
+            int value = 0;
+            int valueb = 0;
+            
+            if(!this.txtUser.getText().isEmpty()){
+                User user = this.repositoryUser.Open(Long.valueOf(this.txtUser.getText()));
+                if(user != null){
+                    for(Purchase purchase : list){
+                        if(purchase.getUser().getId().equals(Long.valueOf(this.txtUser.getText()))){
+                            value = 1;
+                            listP.add(purchase);
+                            System.out.println(purchase.getUser().getId());
+                        }
+                    }
+                    for(Sale sale : lists){
+                        if(sale.getUser().getId().equals(Long.valueOf(this.txtUser.getText()))){
+                            valueb = 1;
+                            listS.add(sale);
+                            System.out.println(sale.getUser().getId());
+                        }
+                    }
+                    
+                }
+            }
+            
+            if(value == 1 && valueb == 1){
+                this.setAll(listP,listS);
+            }    
+            if(value == 1 && valueb == 0){
+                this.setAll(listP,lists);
+            }
+            if(value == 0 && valueb == 1){
+                this.setAll(list,listS);
+            }  
+            if(value == 0 && valueb == 0){
+                this.setAll(list,lists);
+            }  
+        
+    }//GEN-LAST:event_btnAllActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -194,7 +373,7 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSale;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblTransaction;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

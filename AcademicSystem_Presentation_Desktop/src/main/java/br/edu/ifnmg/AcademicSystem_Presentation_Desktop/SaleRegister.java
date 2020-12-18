@@ -35,7 +35,6 @@ public class SaleRegister extends javax.swing.JInternalFrame {
     private Client client;
     private User user;
     private Sale sale;
-    private List<ItemSale> listItem;
     
     /**
      * Creates new form SaleRegister
@@ -44,7 +43,6 @@ public class SaleRegister extends javax.swing.JInternalFrame {
         this.client = new Client();
         this.user = new User();
         this.sale = new Sale();
-        this.listItem = new ArrayList<>();
         initComponents();
     }
     
@@ -62,7 +60,7 @@ public class SaleRegister extends javax.swing.JInternalFrame {
         model.addColumn("Value Unit");
         
         //Aqui eu alimento as linhas com os dados da lista
-        for(ItemSale i : this.listItem){
+        for(ItemSale i : this.sale.getItems()){
             Vector linha = new Vector();
             linha.add(i.getProduct().getName());
             linha.add(i.getAmount());
@@ -96,6 +94,10 @@ public class SaleRegister extends javax.swing.JInternalFrame {
         
         //Aqui eu preencho na tabela 
         tblItem.setModel(model);
+    }
+    
+    public void updateValeu(){
+        this.lblValue.setText(this.sale.getTotalvalue().toString());
     }
     
     /**
@@ -293,46 +295,43 @@ public class SaleRegister extends javax.swing.JInternalFrame {
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         if(!this.txtProductName.getText().isEmpty()){
             //System.out.println("ggggg");
-            for(ItemSale item : listItem){
+            for(ItemSale item : this.sale.getItems()){
                 System.out.println(item.getProduct().getName());
                 if(txtProductName.getText().equals(item.getProduct().getName())){
               //      System.out.println("ggggk");
-                    this.listItem.remove(item);
+                    this.sale.remove(item);
                     this.setTable();
+                    this.updateValeu();
                 }
             }
 
-            for(ItemSale item : listItem){
-                System.out.println(item.getProduct().getName());
-            }
+            
         }
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if(!this.txtClientId.getText().isEmpty() && this.listItem.size() > 0){
+        if(!this.txtClientId.getText().isEmpty() && this.sale.getItems().size() > 0){
             Client client = repositoryClient.Open(Long.valueOf(this.txtClientId.getText()));
             if(client != null){
                 if(JOptionPane.showConfirmDialog(this, "Really want to save?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
                     this.client = client;
-                    for(ItemSale item : this.listItem){
-                        this.sale.add(item);
-                    }
                     this.sale.setClient(this.client);
                     this.sale.setUser(this.user);
                     this.sale.setDescription(this.txtDescription.getText());
                     if(this.repositorySale.Save(this.sale)){
-                        for(ItemSale item : this.listItem){
+                        for(ItemSale item : this.sale.getItems()){
                             Product product = item.getProduct();
                             product.setStock(item.getAmount(), 2);
                             this.repositoryProduct.Save(product);
-                            this.txtProductName.setText("");
-                            this.txtClientId.setText("");
-                            this.txtDescription.setText("");
-                            this.txtAmount.setText("");
-                            this.lblValue.setText("0");
-                            this.setTableNull();
-                            this.listItem = new ArrayList<>();
+                            
                         }
+                        this.txtProductName.setText("");
+                        this.txtClientId.setText("");
+                        this.txtDescription.setText("");
+                        this.txtAmount.setText("");
+                        this.lblValue.setText("0");
+                        this.setTableNull();
+                        this.sale = new Sale();
                         JOptionPane.showMessageDialog(null, "The sale is saved!", "Information", JOptionPane.INFORMATION_MESSAGE);
                     }else{
                         JOptionPane.showMessageDialog(this, "Sale is not saved!","Erro", JOptionPane.ERROR_MESSAGE);
@@ -367,10 +366,11 @@ public class SaleRegister extends javax.swing.JInternalFrame {
                 if(product != null){
                     if((product.getSalereason() * Integer.valueOf(this.txtAmount.getText())) <= product.getStock()){
                         ItemSale item = new ItemSale(product,Integer.valueOf(this.txtAmount.getText()),this.sale);
-                        this.listItem.add(item);
+                        this.sale.add(item);
                         this.setTable();
                         this.txtAmount.setText("");
                         this.txtProductName.setText("");
+                        this.updateValeu();
                     }else{
                         JOptionPane.showMessageDialog(null, "The quantity exceeds the quantity present in the stock!", "Information", JOptionPane.INFORMATION_MESSAGE);
                     }
