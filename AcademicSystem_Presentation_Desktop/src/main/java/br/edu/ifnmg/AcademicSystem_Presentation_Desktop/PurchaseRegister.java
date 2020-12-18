@@ -34,7 +34,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
     private Supplier supplier;
     private User user;
     private Purchase purchase;
-    private List<ItemPurchase> listItem;
+    
     
     /**
      * Creates new form PurchaseRegister
@@ -43,7 +43,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         this.purchase =  new Purchase();
         this.supplier = new Supplier();
         this.user = new User();
-        this.listItem = new ArrayList<>();
+
         initComponents();
     }
 
@@ -61,7 +61,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         model.addColumn("Value Unit");
         
         //Aqui eu alimento as linhas com os dados da lista
-        for(ItemPurchase i : this.listItem){
+        for(ItemPurchase i : this.purchase.getItems()){
             Vector linha = new Vector();
             linha.add(i.getProduct().getName());
             linha.add(i.getAmount());
@@ -98,16 +98,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
     }
     
     public void updateValeu(int type){
-        BigDecimal value = new BigDecimal("0.0");
-        BigDecimal all = new BigDecimal("0.0");
-        for(ItemPurchase i : listItem){
-            value = i.getUnitValue().multiply(new BigDecimal(i.getAmount()));
-            all.add(value);
-            System.out.println(String.valueOf(value));
-            this.lblValue.setText(String.valueOf(all));
-        }
-        this.lblValue.setText(String.valueOf(all));
-        System.out.println(String.valueOf(all));
+        this.lblValue.setText(this.purchase.getTotalvalue().toString());
     }
     
     /**
@@ -316,11 +307,11 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
                 Product product = repositoryProduct.ProductName(this.txtProductName.getText());
                 if(product != null){
                     ItemPurchase item = new ItemPurchase(product,Integer.valueOf(this.txtAmount.getText()),this.purchase);
-                    this.listItem.add(item);
+                    this.purchase.add(item);
                     this.setTable();
                     this.txtAmount.setText("");
                     this.txtProductName.setText("");
-                    
+                    this.updateValeu(1);
                 }else{
                 
                 }
@@ -330,34 +321,34 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         }else{
         
         }
-        this.updateValeu(1);
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        if(!this.txtSupplierId.getText().isEmpty() && this.listItem.size() > 0){
+        if(!this.txtSupplierId.getText().isEmpty() && this.purchase.getItems().size() > 0){
             Supplier supplier = repositorySupplier.Open(Long.valueOf(this.txtSupplierId.getText()));
             if(supplier != null){
                 if(JOptionPane.showConfirmDialog(this, "Really want to save?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
                     this.supplier = supplier;
-                    for(ItemPurchase item : this.listItem){
-                        this.purchase.add(item);
-                    }
+//                    for(ItemPurchase item : this.listItem){
+//                        this.purchase.add(item);
+//                    }
                     this.purchase.setSupplier(this.supplier);
                     this.purchase.setUser(this.user);
                     this.purchase.setDescription(this.txtDescription.getText());
                     if(this.repositoryPurchase.Save(this.purchase)){
-                        for(ItemPurchase item : this.listItem){
+                        for(ItemPurchase item : this.purchase.getItems()){
                             Product product = item.getProduct();
                             product.setStock(item.getAmount(), 1);
                             this.repositoryProduct.Save(product);
-                            this.txtProductName.setText("");
-                            this.txtSupplierId.setText("");
-                            this.txtDescription.setText("");
-                            this.txtAmount.setText("");
-                            this.lblValue.setText("0");
-                            this.setTableNull();
-                            this.listItem = new ArrayList<>();
                         }
+                        this.txtProductName.setText("");
+                        this.txtSupplierId.setText("");
+                        this.txtDescription.setText("");
+                        this.txtAmount.setText("");
+                        this.lblValue.setText("0");
+                        this.setTableNull();
+                        purchase = new Purchase();
                         JOptionPane.showMessageDialog(null, "The purchase is saved!", "Information", JOptionPane.INFORMATION_MESSAGE);
                     }else{
                         JOptionPane.showMessageDialog(this, "Purchase is not saved!","Erro", JOptionPane.ERROR_MESSAGE);
@@ -371,6 +362,7 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(null, "The Supplier Id and Items of purchase must be completed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void txtAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAmountActionPerformed
@@ -380,16 +372,16 @@ public class PurchaseRegister extends javax.swing.JInternalFrame {
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         if(!this.txtProductName.getText().isEmpty()){
             System.out.println("ggggg");
-            for(ItemPurchase item : listItem){
+            for(ItemPurchase item : this.purchase.getItems()){
                 System.out.println(item.getProduct().getName());
                 if(txtProductName.getText().equals(item.getProduct().getName())){
                     System.out.println("ggggk");
-                    this.listItem.remove(item);
+                    this.purchase.remove(item);
                     this.setTable();
                 }
             }
             
-            for(ItemPurchase item : listItem){
+            for(ItemPurchase item : this.purchase.getItems()){
                 System.out.println(item.getProduct().getName());
             }
         }

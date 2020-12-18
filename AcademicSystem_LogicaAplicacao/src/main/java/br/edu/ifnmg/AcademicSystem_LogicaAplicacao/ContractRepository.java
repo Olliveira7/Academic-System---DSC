@@ -10,5 +10,5 @@ package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
  * @author diego
  */
 public interface ContractRepository extends Repository<Contract>{
-    public boolean SearchClientPlan(Client client_id, Plan plan_id);
+    public Contract SearchClientPlan(Client client_id, Plan plan_id);
 }

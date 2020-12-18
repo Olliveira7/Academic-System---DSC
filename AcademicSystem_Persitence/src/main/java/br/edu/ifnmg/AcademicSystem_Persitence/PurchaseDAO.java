@@ -7,6 +7,9 @@ package br.edu.ifnmg.AcademicSystem_Persitence;
 
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Purchase;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.PurchaseRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
+import java.util.List;
+import javax.persistence.Query;
 
 /**
  *
@@ -15,5 +18,12 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.PurchaseRepository;
 public class PurchaseDAO extends DataAccessObject<Purchase> implements PurchaseRepository{
     public PurchaseDAO(){
         super(Purchase.class);
+    }
+
+    @Override
+    public List<Purchase> SearchAll() {
+        String jpql = "select o from Purchase o";
+        Query sql = this.manager.createQuery(jpql);
+        return sql.getResultList();
     }
 }

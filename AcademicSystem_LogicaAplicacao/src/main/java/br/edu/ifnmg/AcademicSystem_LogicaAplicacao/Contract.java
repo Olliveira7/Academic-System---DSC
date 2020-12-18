@@ -49,6 +49,12 @@ public class Contract implements Serializable {
     @Column(name = "description")
     private String description;
     
+    public Contract(Client client, Plan plan){
+        this.client = client;
+        this.plan = plan;
+        this.datetime = new Date();
+    }
+    
     public Contract(){
         this.client = null;
         this.datetime = new Date();

@@ -7,15 +7,11 @@ package br.edu.ifnmg.AcademicSystem_ConsolePresentation;
 
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ClientRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ItemPurchase;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Product;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ProductRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Purchase;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.PurchaseRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Contract;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ContractRepository;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Plan;
+import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.PlanRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Sale;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Supplier;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.SupplierRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
 
@@ -144,7 +140,11 @@ public class Console {
 //        
 //        ItemPurchase i = new ItemPurchase(p,5,pu);
 //        ItemPurchase e = new ItemPurchase(v,5,pu);
-//        
+    
+//          SaleRepository repository = RepositoryFactory.getSaleRepository();
+//          Sale sale = repository.Open(501L);
+//          System.out.println(sale.getUser().getLogin());
+
 //        pu.setSupplier(su);
 //        pu.setUser(u);
 //        pu.add(e);
@@ -209,27 +209,32 @@ public class Console {
 //         s.setName("Carcas");
 //         repo.Save(s);
 //          ContractRepository repoc = RepositoryFactory.getContractRepository();
-//          ClientRepository repo = RepositoryFactory.getClientRepository();
+//          //ClientRepository repo = RepositoryFactory.getClientRepository();
 //          PlanRepository repop = RepositoryFactory.getPlanRepository();
 //          
-//          Plan p = repop.Open();
+//          Plan plan = new Plan();
+//          plan.setName("Premium");
 //          
-//          if(repoc.SearchClientPlan(251L, 71L) == true){
+//          plan.setPrice(new BigDecimal(15d));
+//          
+//          if(repop.Save(plan)){
 //              System.out.println("Susesso");
 //          }
           
-//          ClientRepository repo = RepositoryFactory.getClientRepository();
-//          PlanRepository repop = RepositoryFactory.getPlanRepository();
+          ClientRepository repo = RepositoryFactory.getClientRepository();
+          PlanRepository repop = RepositoryFactory.getPlanRepository();
 //          UserRepository repou = RepositoryFactory.getUserRepository();
-//          ContractRepository repoc = RepositoryFactory.getContractRepository();
+          ContractRepository repoc = RepositoryFactory.getContractRepository();
 //          User user = new User();
-//          Plan plan = new Plan();
-//          Contract con = new Contract();
-//          Client client = new Client();
+          Plan plan = repop.Open(901L);
+          
+          Client client = repo.Open(151L);
+          Contract con = repoc.SearchClientPlan(client, plan);
+          System.out.println(con.getDatetime());
 //          
-//          client = repo.Open(251L);
+//          client = repo.Open(151L);
 //          user = repou.Open(1L);
-//          plan = repop.Open(701L);
+//          plan = repop.Open(901L);
 //          
 //          con.setClient(client);
 //          con.setPlan(plan);
@@ -257,6 +262,8 @@ public class Console {
 //          p.setStreet("amaro");
 //          p.setTelephone("389444444444");
 //          repo.Save(p);
+
+        //Client client = 
     }
     
     

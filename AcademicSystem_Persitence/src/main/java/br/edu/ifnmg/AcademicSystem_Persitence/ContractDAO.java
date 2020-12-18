@@ -22,22 +22,13 @@ public class ContractDAO extends DataAccessObject<Contract> implements ContractR
     }
 
     @Override
-    public boolean SearchClientPlan(Client client_id, Plan plan_id) {
+    public Contract SearchClientPlan(Client client, Plan plan) {
         System.out.println("111111");
         // l where l.client_id = :client_id and l.plan_id = :plan_id   
-        Query sql = this.manager.createQuery("select l from Contract l");
-        
-        List<Contract> list = sql.getResultList();
-        
-        if(list.size() > 0){
-            for(Contract contract : list){
-                System.out.println(contract.getClient().toString());
-                if(contract.getClient().equals(client_id) && contract.getPlan().equals(plan_id)){
-                    return true;
-                }
-            }
-            return true;
-        }
-        return false;
+        Query sql = this.manager.createQuery("select l from Contract l where l.client = :client and l.plan = :plan");
+        sql.setParameter("client", client);
+        sql.setParameter("plan", plan);
+
+        return (Contract)sql.getSingleResult();
     }
 }
