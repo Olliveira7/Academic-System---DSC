@@ -5,10 +5,14 @@
  */
 package br.edu.ifnmg.AcademicSystem_LogicaAplicacao;
 
+import java.util.List;
+
 /**
  *
  * @author diego
  */
 public interface ContractRepository extends Repository<Contract>{
-    public Contract SearchClientPlan(Client client_id, Plan plan_id);
+    public List<Contract> SearchClientPlan(Client client_id, Plan plan_id);
+    public List<Contract> SearchAll();
+    public Contract OpenExist(Client client, Plan plan);
 }

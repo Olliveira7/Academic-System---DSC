@@ -5,15 +5,11 @@
  */
 package br.edu.ifnmg.AcademicSystem_ConsolePresentation;
 
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ClientRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Contract;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ContractRepository;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Plan;
-import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.PlanRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
+import static br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Sale_.client;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.UserRepository;
+import java.util.List;
 
 
 /**
@@ -221,16 +217,25 @@ public class Console {
 //              System.out.println("Susesso");
 //          }
           
-          ClientRepository repo = RepositoryFactory.getClientRepository();
-          PlanRepository repop = RepositoryFactory.getPlanRepository();
-//          UserRepository repou = RepositoryFactory.getUserRepository();
-          ContractRepository repoc = RepositoryFactory.getContractRepository();
-//          User user = new User();
-          Plan plan = repop.Open(901L);
-          
-          Client client = repo.Open(151L);
-          Contract con = repoc.SearchClientPlan(client, plan);
-          System.out.println(con.getDatetime());
+//          ClientRepository repo = RepositoryFactory.getClientRepository();
+//          PlanRepository repop = RepositoryFactory.getPlanRepository();
+////          UserRepository repou = RepositoryFactory.getUserRepository();
+//          ContractRepository repoc = RepositoryFactory.getContractRepository();
+////          User user = new User();
+//          Plan plan = repop.Open(901L);
+//          
+//          Client client = repo.Open(151L);
+//          List<Contract> con = repoc.SearchClientPlan(client, plan);
+//          
+//          for(Contract com: con){
+//              System.out.println(com.getClient().getName());
+//          }
+            
+            UserRepository repo = RepositoryFactory.getUserRepository();
+            User user = new User();
+            user.setId(1L);
+            user.setLogin("adm");
+            List<User> list = repo.Search(user);
 //          
 //          client = repo.Open(151L);
 //          user = repou.Open(1L);

@@ -9,6 +9,7 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Client;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Contract;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.ContractRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Plan;
+import java.util.HashMap;
 import java.util.List;
 import javax.persistence.Query;
 
@@ -22,13 +23,62 @@ public class ContractDAO extends DataAccessObject<Contract> implements ContractR
     }
 
     @Override
-    public Contract SearchClientPlan(Client client, Plan plan) {
-        System.out.println("111111");
-        // l where l.client_id = :client_id and l.plan_id = :plan_id   
+    public List<Contract> SearchClientPlan(Client client, Plan plan) {
+        String jpql = "select o from Contract o";
+        
+        HashMap <String, Object> parameter = new HashMap<>();
+        
+        if(client != null){
+            if(client.getId() != null){
+                parameter.put("client", client);
+            }
+            if( plan != null){
+                parameter.put("plan", plan);
+            }
+        }
+        
+        if(!parameter.isEmpty()){
+            String filter = "";
+            jpql += " where ";
+            for(String field : parameter.keySet()){
+                if(!filter.isEmpty()){
+                    filter += " and ";
+                }
+                jpql += "o." + field + " = :" + field;
+            }
+            jpql += filter;
+        }
+        
+        Query sql = this.manager.createQuery(jpql);
+        
+        if(!parameter.isEmpty()){
+            for(String field : parameter.keySet()){
+                sql.setParameter(field, parameter.get(field));
+            }
+        }
+        
+        return sql.getResultList();
+    }
+
+    @Override
+    public List<Contract> SearchAll() {
+        String jpql = "select o from Contract o";
+        Query sql = this.manager.createQuery(jpql);
+        return sql.getResultList();
+    }
+
+    @Override
+    public Contract OpenExist(Client client, Plan plan) {
+        String jpql = "select o from Contract o";
         Query sql = this.manager.createQuery("select l from Contract l where l.client = :client and l.plan = :plan");
         sql.setParameter("client", client);
         sql.setParameter("plan", plan);
-
-        return (Contract)sql.getSingleResult();
+        
+        if(sql.getResultList().size() > 0){
+            return (Contract) sql.getSingleResult();
+        }else{
+            return null;
+        }
+        //return sql.getResultList();
     }
 }

@@ -13,17 +13,14 @@ import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.Plan;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.PlanRepository;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.RepositoryFactory;
 import br.edu.ifnmg.AcademicSystem_LogicaAplicacao.User;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author diego
  */
-public class ContractRegister extends javax.swing.JInternalFrame {
+public class ContractRemove extends javax.swing.JInternalFrame {
 
     PlanRepository repositoryP = RepositoryFactory.getPlanRepository();
     ContractRepository repositoryCo = RepositoryFactory.getContractRepository();
@@ -34,47 +31,15 @@ public class ContractRegister extends javax.swing.JInternalFrame {
     Client client;
     
     /**
-     * Creates new form ContractRegister
+     * Creates new form ContractRemove
      */
-    public ContractRegister() {
-        this.user = new User();
+    public ContractRemove() {
         this.plan = new Plan();
         this.client = new Client();
+        this.user = new User();
         initComponents();
     }
-    
-    public void setContract(User user){
-        this.setTable();
-        this.user = user;
-    }
 
-    public void setTable(){
-        List<Plan> result = new ArrayList<>();
-        
-        
-        result = repositoryP.Search(null);
-        
-        //Aqui eu alimento uma lista com o método pesquisa que retorna uma lista
-        //List<Client> result = repository.Search(client);
-        
-        //Crio um atributo do tipo que recebe colunas e linhas 
-        DefaultTableModel model = new DefaultTableModel();
-        
-        //Alimento com os nomes das colunas 
-        model.addColumn("Plan");
-        model.addColumn("Price");
-        
-        //Aqui eu alimento as linhas com os dados da lista
-        for(Plan p : result){
-            Vector linha = new Vector();
-            linha.add(p.getName());
-            linha.add(p.getPrice().toString());
-            model.addRow(linha);
-        }
-        //Aqui eu preencho na tabela 
-        tblPlan.setModel(model);
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,55 +50,25 @@ public class ContractRegister extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblPlan = new javax.swing.JTable();
-        btnSave = new javax.swing.JButton();
         txtClientId = new javax.swing.JTextField();
         txtPlanName = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        btnRemove = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Contract Register");
+        setTitle("Remove Contract");
+        setToolTipText("");
 
         jLabel1.setText("Client Id:");
 
         jLabel2.setText("Plan Name:");
 
-        tblPlan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Plan", "Price"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblPlan);
-        if (tblPlan.getColumnModel().getColumnCount() > 0) {
-            tblPlan.getColumnModel().getColumn(0).setResizable(false);
-            tblPlan.getColumnModel().getColumn(1).setResizable(false);
-        }
-
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        btnRemove.setText("Remove");
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                btnRemoveActionPerformed(evt);
             }
         });
 
@@ -141,29 +76,27 @@ public class ContractRegister extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtClientId))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txtPlanName))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnSave))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtPlanName)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnRemove)
+                .addContainerGap(311, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtClientId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,18 +104,15 @@ public class ContractRegister extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPlanName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnSave)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(btnRemove)
+                .addGap(19, 19, 19))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         if(!this.txtClientId.getText().isEmpty() && !this.txtPlanName.getText().isEmpty()){
             List<Client> listClient = this.repositoryC.Search(null);
             List<Plan> listPlan = this.repositoryP.Search(null);
@@ -210,19 +140,19 @@ public class ContractRegister extends javax.swing.JInternalFrame {
                         test = 1;
                     }
                 }
-                if(test == 0){
-                    Contract contract = new Contract();
-                    contract.setClient(client);
-                    contract.setPlan(plan);
-                    contract.setUser(user);
-                    this.txtClientId.setText("");
-                    this.txtPlanName.setText("");
-                    this.client = new Client();
-                    this.plan = new Plan();
-                    if(this.repositoryCo.Save(contract)){
-                        JOptionPane.showMessageDialog(this, "Contract is saved!","Erro", JOptionPane.ERROR_MESSAGE);
+                if(test == 1){
+                    Contract contract = this.repositoryCo.OpenExist(client, plan);
+                    if(contract != null){
+                        if(this.repositoryCo.Delete(contract)){
+                            JOptionPane.showMessageDialog(null, "Contract removed!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                            this.txtClientId.setText("");
+                            this.txtPlanName.setText("");
+                        }else{
+                           JOptionPane.showMessageDialog(null, "Contract is not saved!", "Error", JOptionPane.ERROR_MESSAGE); 
+                        }
+                        
                     }else{
-                        JOptionPane.showMessageDialog(this, "Contract is not saved!","Erro", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "There is no such contract!", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }else{
                     JOptionPane.showMessageDialog(null, "This customer already has this plan!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -233,15 +163,13 @@ public class ContractRegister extends javax.swing.JInternalFrame {
         }else{
             JOptionPane.showMessageDialog(null, "The Client and Plan must be completed!", "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnSaveActionPerformed
+    }//GEN-LAST:event_btnRemoveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnRemove;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblPlan;
     private javax.swing.JTextField txtClientId;
     private javax.swing.JTextField txtPlanName;
     // End of variables declaration//GEN-END:variables
