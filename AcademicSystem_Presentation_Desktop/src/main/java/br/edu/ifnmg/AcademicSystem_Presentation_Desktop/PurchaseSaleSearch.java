@@ -79,7 +79,7 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
         }
         this.tblTransaction.setModel(model);
     }
-    
+
     public void setPurchase(List<Purchase> list){
         
         
@@ -106,7 +106,7 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
         this.tblTransaction.setModel(model);
     }
     
-    public void setAll(List<Purchase> list, List<Sale> lists){
+    public void setNull(){
         
         
         DefaultTableModel model = new DefaultTableModel();
@@ -118,30 +118,19 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
         model.addColumn("Supplier");
         model.addColumn("Value");
         
-        for(Purchase item : list){
+        
             Vector line = new Vector();
-            line.add("Purchase");
-            line.add(item.getDatetime().toString());
-            line.add(item.getUser().getName());
             line.add("");
-            line.add(item.getSupplier().getName());
-            line.add(item.getTotalvalue());
+            line.add("");
+            line.add("");
+            line.add("");
+            line.add("");
+            line.add("");
             
             model.addRow(line);
-        }
-        for(Sale item : lists){
-            Vector line = new Vector();
-            line.add("Sale");
-            line.add(item.getDatetime().toString());
-            line.add(item.getUser().getName());
-            line.add(item.getClient().getName());
-            line.add("");
-            line.add(item.getTotalvalue());
-            
-            model.addRow(line);
-        }
         this.tblTransaction.setModel(model);
     }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -158,7 +147,6 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
         btnSale = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTransaction = new javax.swing.JTable();
-        btnAll = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -214,13 +202,6 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
             tblTransaction.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        btnAll.setText("All");
-        btnAll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAllActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -234,8 +215,6 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(btnPurchase)
-                .addGap(128, 128, 128)
-                .addComponent(btnAll)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSale)
                 .addGap(33, 33, 33))
@@ -254,8 +233,7 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPurchase)
-                    .addComponent(btnSale)
-                    .addComponent(btnAll))
+                    .addComponent(btnSale))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -269,9 +247,10 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
             List<Purchase> list = repositoryPurchase.SearchAll();
             List<Purchase> listP = new ArrayList<>();
             int value = 0;
-            
+            User user = new User();
             if(!this.txtUser.getText().isEmpty()){
-                User user = this.repositoryUser.Open(Long.valueOf(this.txtUser.getText()));
+                user = this.repositoryUser.Open(Long.valueOf(this.txtUser.getText()));
+                
                 if(user != null){
                     for(Purchase purchase : list){
                         if(purchase.getUser().getId().equals(Long.valueOf(this.txtUser.getText()))){
@@ -279,17 +258,20 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
                             listP.add(purchase);
                             System.out.println(purchase.getUser().getId());
                         }
+                        this.setNull();
                     }
+                }else{
+                    this.setPurchase(list);
                 }
+            }else{
+                this.setPurchase(list);
             }
             
             if(value == 1){
-                this.setPurchase(listP);
+                    this.setPurchase(listP);
                 
-            }else{
-                this.setPurchase(list);
-            
             }
+            
     }//GEN-LAST:event_btnPurchaseActionPerformed
 
     private void btnSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaleActionPerformed
@@ -297,9 +279,9 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
             List<Sale> list = repositorySale.SearchAll();
             List<Sale> listP = new ArrayList<>();
             int value = 0;
-            
+            User user = new User();
             if(!this.txtUser.getText().isEmpty()){
-                User user = this.repositoryUser.Open(Long.valueOf(this.txtUser.getText()));
+                user = this.repositoryUser.Open(Long.valueOf(this.txtUser.getText()));
                 if(user != null){
                     for(Sale sale : list){
                         if(sale.getUser().getId().equals(Long.valueOf(this.txtUser.getText()))){
@@ -307,68 +289,24 @@ public class PurchaseSaleSearch extends javax.swing.JInternalFrame {
                             listP.add(sale);
                             System.out.println(sale.getUser().getId());
                         }
+                        this.setNull();
                     }
+                }else{
+                    this.setSale(list);
                 }
+            }else{
+                this.setSale(list);
             }
             
             if(value == 1){
-                this.setSale(listP);
-                
-            }else{
-                this.setSale(list);
+                   this.setSale(listP);   
+            }
             
-           }
+            
     }//GEN-LAST:event_btnSaleActionPerformed
-
-    private void btnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAllActionPerformed
-        
-        
-        List<Purchase> list = repositoryPurchase.SearchAll();
-        List<Sale> lists = repositorySale.SearchAll();
-            List<Purchase> listP = new ArrayList<>();
-            List<Sale> listS = new ArrayList<>();
-            int value = 0;
-            int valueb = 0;
-            
-            if(!this.txtUser.getText().isEmpty()){
-                User user = this.repositoryUser.Open(Long.valueOf(this.txtUser.getText()));
-                if(user != null){
-                    for(Purchase purchase : list){
-                        if(purchase.getUser().getId().equals(Long.valueOf(this.txtUser.getText()))){
-                            value = 1;
-                            listP.add(purchase);
-                            System.out.println(purchase.getUser().getId());
-                        }
-                    }
-                    for(Sale sale : lists){
-                        if(sale.getUser().getId().equals(Long.valueOf(this.txtUser.getText()))){
-                            valueb = 1;
-                            listS.add(sale);
-                            System.out.println(sale.getUser().getId());
-                        }
-                    }
-                    
-                }
-            }
-            
-            if(value == 1 && valueb == 1){
-                this.setAll(listP,listS);
-            }    
-            if(value == 1 && valueb == 0){
-                this.setAll(listP,lists);
-            }
-            if(value == 0 && valueb == 1){
-                this.setAll(list,listS);
-            }  
-            if(value == 0 && valueb == 0){
-                this.setAll(list,lists);
-            }  
-        
-    }//GEN-LAST:event_btnAllActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAll;
     private javax.swing.JButton btnPurchase;
     private javax.swing.JButton btnSale;
     private javax.swing.JLabel jLabel1;

@@ -262,11 +262,11 @@ public class ProductRegister extends javax.swing.JInternalFrame {
                 this.getComponent();
                 if(repository.Save(product)){
                     JOptionPane.showMessageDialog(null, "The product is saved!", "Information", JOptionPane.INFORMATION_MESSAGE);
-                    if(JOptionPane.showConfirmDialog(this, "Do you want to crate another client?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
+                    if(JOptionPane.showConfirmDialog(this, "Do you want to create another client?", "Confirm", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_NO_OPTION){
                         this.product = new Product();
                         this.setNull();
                     }else{
-                        this.setVisible(true);
+                        this.setVisible(false);
                     }
                 }else{
                    JOptionPane.showMessageDialog(this, "Product is not saved!","Erro", JOptionPane.ERROR_MESSAGE);
